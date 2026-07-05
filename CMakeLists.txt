@@ -43,5 +43,17 @@ target_include_directories(test_logger PRIVATE
 
 add_test(NAME logger_test COMMAND test_logger)
 
+# Filesystem test (标准库专项，最小改动): 使用 std::filesystem
+add_executable(test_filesystem
+    tests/test_filesystem.cpp
+    src/common/FilesystemUtils.cpp
+)
+
+target_include_directories(test_filesystem PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+add_test(NAME filesystem_test COMMAND test_filesystem)
+
 # Optional: make the main target the default
 # (build with cmake --build build)
