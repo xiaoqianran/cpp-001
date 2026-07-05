@@ -1,0 +1,23 @@
+# Build artifacts - never commit (per hard rules)
+build/
+cmake-build-*/
+bin/
+obj/
+*.o
+*.a
+*.so
+*.exe
+*.out
+
+# IDE / editor
+.idea/
+.vscode/
+*.swp
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs / temp from our runs (local)
+*.log
