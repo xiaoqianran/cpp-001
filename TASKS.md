@@ -5,7 +5,9 @@
 
 ## 当前任务
 
+- [x] feat: repository 层最小示例（使用 SQLiteCpp + Result）
 - [x] feat: 标准库并发 - 添加 AtomicCounter（std::atomic 练习）
+
 - [x] feat: 标准库专项 - 并发练习（添加 ThreadSafeCounter，使用 std::mutex）
 
 - [x] feat: 为 Result 添加简单链式操作 (and_then / map)

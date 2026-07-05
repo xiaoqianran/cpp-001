@@ -226,3 +226,9 @@
 - 目标：展示 repository 层使用 SQLiteCpp + 错误处理。
 - 执行：tests/test_repo.cpp 使用 :memory: DB + CRUD 演示。
 - 验证：repo_test 通过。
+
+## 2026-07-06 feat: repository 层最小示例（使用 SQLiteCpp + Result）
+
+- 目标：为后续分层打基础。
+- 执行：test_repo 演示 SQLiteCpp 基本用法。
+- 验证：repo_test 通过。
