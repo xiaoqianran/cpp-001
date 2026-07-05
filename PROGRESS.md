@@ -25,6 +25,28 @@
 - 下一步：见 TASKS.md 中的下一个小任务（feat: 基础日志封装）。
 - 2026-07-06 post-merge docs update: 标记 bootstrap 完成，明确列出下一最小任务。工作区干净，历史含两个 chore/合并提交。
 
+## 2026-07-06 feat: 基础日志封装
+
+- 目标：添加最小 std:: 实现的 Logger 到 common/ 层，作为后续日志/格式化库的占位。
+- 执行：
+  - 读取 TASKS.md，选择最小任务。
+  - 创建 worktree cpp-001-task-002 (branch task/logger)。
+  - 实现 common::Logger + Logger.cpp（chrono 时间戳、4 级 LogLevel、ostream 注入、string_view）。
+  - tests/test_logger.cpp 直接调用真实实现，使用 ostringstream 验证输出格式和内容，同时协同 Status。
+  - 最小修改 CMakeLists.txt 添加 test_logger target 和 add_test。
+  - 工作树内执行 cmake + build + ctest （100% 通过，包括 logger_test）。
+  - feat: 提交，合并回 main，删除 worktree。
+  - 更新文档、全局记忆。
+- 学习要点（C++ 知识）：
+  - std::chrono::system_clock + put_time + localtime_r (平台兼容)。
+  - string_view 高效传参。
+  - 通过 ostream& 依赖注入实现可测试性（无需真实 IO）。
+  - enum class 值语义。
+  - 头文件默认参数需包含必要头（<iostream>）。
+  - common 层横切关注点（Logger + Status 可组合）。
+- 验证：ctest 通过，主程序仍正常构建运行。符合所有硬规则（无业务进 main、无裸指针）。
+- 全局记忆已更新。
+
 ## 总结
 
-初始模板完成。后续每次只推进一个明确小任务 + 更新文档 + commit。
+初始模板 + 第一个 std 专项完成。后续每次只推进一个明确小任务 + 更新文档 + commit。

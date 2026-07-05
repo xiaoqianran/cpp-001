@@ -10,6 +10,8 @@
 - C++17 特性可用（structured bindings、optional、variant、filesystem 等），但注意编译器支持。
 - 避免在头文件中定义非 inline 的非模板函数（ODR 问题）。
 - 暂无大型库，故无 ABI、链接顺序、find_package 问题。
+- C++17 chrono 格式化：需手动 put_time + localtime_r/gmtime_r，注意平台差异（_s vs _r）和线程安全。生产建议用库。
+- 头文件默认参数：使用 std::cout 等必须 #include <iostream> 在声明所在头中。
 
 ## 未来添加条目格式
 

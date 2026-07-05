@@ -40,11 +40,54 @@
 
 （bootstrap 阶段无外部库。第一个库笔记将在引入时追加。）
 
-### 标准库使用记录（Status 示例涉及）
+### 标准库使用记录（Status + Logger 示例涉及）
 
 - 使用了 C++17 class + value semantics。
 - static factory + private ctor 惯用法。
 - noexcept 正确使用。
 - 直接由测试驱动真实 .cpp 实现（链接）。
+
+## 标准库：chrono / string_view / ostream 用于日志
+
+### 所属分类
+C++ 标准库专项（chrono, string_view, iostream）—— 对应推荐阶段 2。
+
+### 解决的问题
+提供轻量、零依赖的时间戳日志记录。便于早期开发和测试注入。
+
+### 本项目如何使用
+- 新增 include/common/Logger.hpp + src/common/Logger.cpp
+- tests/test_logger.cpp （使用 stringstream 验证）
+- CMakeLists.txt 最小添加 test_logger 目标
+- 测试中同时验证与 Status 协同
+
+### 最小示例
+```cpp
+std::ostringstream oss;
+common::Logger log(oss);
+log.log(common::LogLevel::Info, "hello");
+assert(oss.str().find("[INFO]") != std::string::npos);
+```
+
+### C++ 知识点
+- std::chrono (system_clock, duration_cast, time_t 转换)
+- std::put_time + localtime_r (跨平台)
+- std::string_view (零拷贝传参)
+- ostream 依赖注入 (测试友好)
+- enum class (强类型值语义)
+- RAII/值语义优先
+
+### 常见坑
+- C++17 下 chrono 格式化仍需手动（无 std::format 直到 C++20）。
+- 头文件中默认参数需要 #include 对应头，否则链接/编译错误。
+- localtime 线程不安全，生产可用 std::put_time + gmtime 或库。
+
+### 替代方案
+- fmt::format + spdlog（后续引入，更现代、高性能）
+- Boost.Log （重）
+- 纯 std::clog 但缺少级别/时间戳控制
+
+### 结论
+非常适合 bootstrap 和学习阶段。生产后端推荐替换为 spdlog + fmt。易于演进（Logger 接口可保持）。
 
 未来每个库都必须有这样结构化的笔记。
