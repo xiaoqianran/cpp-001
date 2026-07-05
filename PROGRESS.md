@@ -55,6 +55,20 @@
 - 验证：ctest 全绿，主程序构建正常。
 - 全局记忆已同步。
 
+## 2026-07-06 feat: main 中集成 Logger
+
+- 目标：将 Logger 集成到主程序启动路径（极薄，仅替换启动日志输出）。
+- 执行：
+  - 使用预创建 worktree cpp-001-task-004。
+  - 最小修改 main.cpp：引入 Logger，替换 cout 为 logger.log(Info, ...) 。
+  - 最小 CMake：将 Logger.cpp 加入 cpp-001 target。
+  - worktree 内构建 + ctest 全绿，主程序输出带时间戳日志。
+  - feat commit，合并，删除 worktree。
+  - 更新 TASKS/PROGRESS。
+- 学习要点：main 保持极薄（仅启动/日志）；Logger 依赖注入使 main 易测试和演进。
+- 验证：ctest 100%，主程序输出正确格式日志。
+- 全局记忆更新。
+
 ## 总结
 
-初始模板 + std 专项（Logger） + 架构同步完成。后续每次只推进一个明确小任务 + 更新文档 + commit。
+初始模板 + std 专项（Logger + main 集成）完成。后续每次只推进一个明确小任务 + 更新文档 + commit。
