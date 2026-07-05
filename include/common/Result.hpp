@@ -1,30 +1,34 @@
 #pragma once
 
-#include <variant>
 #include <utility>
+#include <string>
 
 namespace common {
 
 /**
- * 最小 Result<T, E>（C++17 变体实现，类似 std::expected）。
+ * 最小 Result<T, E>（C++17 实现，避免 variant 同类型歧义）。
  * - 值语义。
  * - 支持 is_ok / is_err / value / error。
- * - 用于错误处理，替代裸异常或 bool。
  */
 template <typename T, typename E>
 class Result {
 public:
-    Result(T value) : data_(std::move(value)) {}
-    Result(E error) : data_(std::move(error)) {}
+    // OK 构造
+    Result(T value) : ok_(true), value_(std::move(value)) {}
 
-    bool is_ok() const { return std::holds_alternative<T>(data_); }
-    bool is_err() const { return std::holds_alternative<E>(data_); }
+    // ERR 构造
+    Result(bool /*tag*/, E error) : ok_(false), error_(std::move(error)) {}
 
-    const T& value() const { return std::get<T>(data_); }
-    const E& error() const { return std::get<E>(data_); }
+    bool is_ok() const { return ok_; }
+    bool is_err() const { return !ok_; }
+
+    const T& value() const { return value_; }
+    const E& error() const { return error_; }
 
 private:
-    std::variant<T, E> data_;
+    bool ok_;
+    T value_;
+    E error_;
 };
 
 } // namespace common

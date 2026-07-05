@@ -403,3 +403,24 @@ if (r.is_ok()) { use(r.value()); }
 
 ### 结论
 强烈推荐在后端 common 层使用，提升健壮性。
+
+## 改进：Config 使用 Result 进行错误处理
+
+### 变化
+- get_string / get_int 现在返回 Result 而非 optional。
+- 错误时返回 err，包含描述信息。
+- 与 common::Result 结合使用。
+
+### 好处
+- 强制调用者处理错误。
+- 与其他层一致的错误处理模式。
+
+### 示例
+```cpp
+auto res = cfg.get_int("port");
+if (res.is_ok()) {
+    use(res.value());
+} else {
+    log(res.error());
+}
+```

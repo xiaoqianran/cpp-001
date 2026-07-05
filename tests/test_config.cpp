@@ -5,7 +5,6 @@
 #include <iostream>
 
 int main() {
-    // 直接驱动真实 Config + toml++
     std::string toml = R"(
         server_name = "cpp-001"
         port = 8080
@@ -13,17 +12,18 @@ int main() {
 
     common::Config cfg(toml);
 
-    auto name = cfg.get_string("server_name");
-    assert(name.has_value());
-    assert(*name == "cpp-001");
+    auto name_res = cfg.get_string("server_name");
+    assert(name_res.is_ok());
+    assert(name_res.value() == "cpp-001");
 
-    auto port = cfg.get_int("port");
-    assert(port.has_value());
-    assert(*port == 8080);
+    auto port_res = cfg.get_int("port");
+    assert(port_res.is_ok());
+    assert(port_res.value() == 8080);
 
     // unknown key
     auto unknown = cfg.get_string("missing");
-    assert(!unknown.has_value());
+    assert(unknown.is_err());
+    assert(unknown.error().find("missing") != std::string::npos);
 
     std::cout << "config test passed\n";
     return 0;
