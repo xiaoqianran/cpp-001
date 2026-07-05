@@ -5,7 +5,8 @@
 
 ## 当前任务
 
-- [ ] build: 接入 nlohmann/json 做序列化（build: 接入 nlohmann/json）
+- [ ] build: 接入 cpp-httplib 做 HTTP（build: 接入 cpp-httplib）
+- [x] build: 接入 nlohmann/json 做序列化（build: 接入 nlohmann/json）
 - [x] build: 接入 toml++ 做配置（build: 接入 toml++）
 - [x] build: 接入 spdlog 做日志（基于 fmt）
 - [x] build: 接入 fmt 做格式化（build: 接入 fmt）
