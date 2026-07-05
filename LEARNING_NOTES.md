@@ -329,3 +329,39 @@ svr.listen("0.0.0.0", 8080);
 
 ### 结论
 极佳的 HTTP 学习起点，轻量无依赖。
+
+## 库名：SQLiteCpp
+
+### 所属分类
+数据库（awesome-cpp 数据库方向）。
+
+### 解决的问题
+C++ 友好的 SQLite 封装，RAII、安全。
+
+### 本项目如何使用
+- CMake FetchContent SQLiteCpp。
+- tests/test_sqlite.cpp：in-memory DB + Statement。
+- 未来 repository 层可扩展。
+
+### 最小示例
+```cpp
+SQLite::Database db(":memory:");
+db.exec("CREATE TABLE ...");
+```
+
+### C++ 知识点
+- RAII（Database、Statement 自动关闭）。
+- 异常安全。
+- 编译 sqlite3 源码。
+
+### 常见坑
+- 需要 link sqlite3（FetchContent 处理）。
+- 事务管理。
+
+### 替代方案
+- sqlite_orm（ORM 风格）。
+- SOCI。
+- 裸 sqlite3 C API。
+
+### 结论
+轻量嵌入式 DB 很好起点。

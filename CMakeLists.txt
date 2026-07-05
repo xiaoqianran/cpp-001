@@ -46,6 +46,14 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(httplib)
 
+# 接入 SQLiteCpp（数据库，最小改动）
+FetchContent_Declare(
+  SQLiteCpp
+  GIT_REPOSITORY https://github.com/SRombauts/SQLiteCpp.git
+  GIT_TAG        3.3.1
+)
+FetchContent_MakeAvailable(SQLiteCpp)
+
 # Main executable - thin startup only (per rules)
 add_executable(cpp-001
     src/main.cpp
@@ -141,3 +149,16 @@ target_include_directories(test_httplib PRIVATE
 target_link_libraries(test_httplib PRIVATE httplib::httplib)
 
 add_test(NAME httplib_test COMMAND test_httplib)
+
+# SQLite test (SQLiteCpp)
+add_executable(test_sqlite
+    tests/test_sqlite.cpp
+)
+
+target_include_directories(test_sqlite PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+target_link_libraries(test_sqlite PRIVATE SQLiteCpp sqlite3)
+
+add_test(NAME sqlite_test COMMAND test_sqlite)
