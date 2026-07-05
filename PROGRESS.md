@@ -105,3 +105,11 @@
 - 执行：worktree task/spdlog，CMake FetchContent spdlog v1.14.1，Logger 混合实现（默认 spdlog console，测试路径保留 fmt），测试通过，commit 合并。
 - 学习要点：spdlog 依赖 fmt、sink 机制、pattern、level 映射、与现有 ostream 注入兼容的混合策略。
 - 验证：ctest 100%。
+
+## 2026-07-06 build: 接入 toml++ 做配置
+
+- 目标：引入 toml++ 作为配置解析库，添加最小 Config 封装。
+- 执行：worktree task/tomlpp，CMake FetchContent tomlplusplus v3.4.0，创建 common::Config（parse + get_string/get_int），tests/test_config.cpp 驱动真实实现，构建测试全绿。
+- 学习要点：toml++ 现代 C++17 API（table、value<T>）、header-only、in-memory parse 便于测试、类型安全 optional。
+- 验证：新增 config_test 通过，所有测试 100%。
+- 文档更新：LEARNING_NOTES + TASKS + PROGRESS。

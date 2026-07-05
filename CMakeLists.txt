@@ -22,6 +22,14 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(spdlog)
 
+# 接入 toml++（配置库，最小改动，基于 C++17）
+FetchContent_Declare(
+  tomlplusplus
+  GIT_REPOSITORY https://github.com/marzer/tomlplusplus.git
+  GIT_TAG        v3.4.0
+)
+FetchContent_MakeAvailable(tomlplusplus)
+
 # Main executable - thin startup only (per rules)
 add_executable(cpp-001
     src/main.cpp
@@ -78,3 +86,16 @@ add_test(NAME filesystem_test COMMAND test_filesystem)
 
 # Optional: make the main target the default
 # (build with cmake --build build)
+# Config test (toml++ 接入)
+add_executable(test_config
+    tests/test_config.cpp
+    src/common/Config.cpp
+)
+
+target_include_directories(test_config PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+target_link_libraries(test_config PRIVATE tomlplusplus::tomlplusplus)
+
+add_test(NAME config_test COMMAND test_config)

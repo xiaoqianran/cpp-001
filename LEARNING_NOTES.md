@@ -210,3 +210,44 @@ logger->info("Server starting");
 
 ### 结论
 后端日志首选，与 fmt 完美搭配。适合生产，测试需注意 sink。
+
+## 库名：toml++
+
+### 所属分类
+格式化、日志、配置（awesome-cpp 配置/序列化相关）。
+
+### 解决的问题
+现代 TOML 解析与序列化，类型安全、零依赖、易用 API，适合应用配置。
+
+### 本项目如何使用
+- CMakeLists.txt: FetchContent tomlplusplus v3.4.0，target_link_libraries 到 test_config。
+- 新增 include/common/Config.hpp + src/common/Config.cpp：最小封装 toml::parse + .value<T>() + optional。
+- tests/test_config.cpp：直接调用真实实现，验证字符串/整数获取。
+- 未来可扩展到 src/config/ 层加载文件。
+
+### 最小示例
+```cpp
+toml::table tbl = toml::parse(R"(port = 8080)");
+auto port = tbl["port"].value<int>();
+```
+
+### C++ 知识点
+- 模板 value<T>() + optional 错误处理（现代 C++）。
+- 头文件 only 库接入。
+- string_view 传参。
+- RAII（table 生命周期）。
+- FetchContent 依赖管理。
+
+### 常见坑
+- 版本选择（v3.x 推荐，C++17 要求）。
+- 嵌套表访问需 tbl["a"]["b"]。
+- 解析错误抛异常（需 try/catch 或 check）。
+- 与 nlohmann/json 对比：TOML 更适合人类可读配置。
+
+### 替代方案
+- yaml-cpp（更复杂）。
+- Boost.Program_options（命令行 + 配置）。
+- nlohmann/json（JSON 更流行但 TOML 更友好）。
+
+### 结论
+后端配置首选之一，轻量现代。非常适合当前阶段学习 CMake + 配置加载。

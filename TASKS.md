@@ -17,6 +17,8 @@
 
 ## 已完成
 
+- build: 接入 toml++ 做配置 (2026-07-06): FetchContent tomlplusplus v3.4.0，新增 common::Config 最小封装，支持字符串/整数获取，带单元测试，全绿。
+
 - build: 接入 spdlog 做日志 (2026-07-06): FetchContent spdlog v1.14.1 (依赖 fmt)，Logger 混合使用 spdlog（默认 console）+ fmt（测试 ostream 注入），构建测试全绿。
 
 - build: 接入 fmt 做格式化 (2026-07-06): 使用 FetchContent 引入 fmt 10.2.1，最小 CMake 改动，Logger 使用 fmt::format 重构日志输出，构建测试全绿，commit 合并。
