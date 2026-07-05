@@ -5,6 +5,7 @@
 
 ## 当前任务
 
+- [ ] feat: 基础日志封装（在 common 中添加最小 Logger，使用 std::chrono / ostream 起步，带单元测试，可构建可运行）
 - [x] bootstrap: 初始化 C++ 后端项目骨架、八个文档、目录结构、最小 CMake + 真实单元测试（Status value type in common）
 
 ## 已完成
