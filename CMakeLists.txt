@@ -29,5 +29,18 @@ target_include_directories(test_status PRIVATE
 
 add_test(NAME status_test COMMAND test_status)
 
+# Logger test (最小改动): 直接驱动真实 common::Logger + chrono/ostream
+add_executable(test_logger
+    tests/test_logger.cpp
+    src/common/Logger.cpp
+    src/common/Status.cpp
+)
+
+target_include_directories(test_logger PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+add_test(NAME logger_test COMMAND test_logger)
+
 # Optional: make the main target the default
 # (build with cmake --build build)
