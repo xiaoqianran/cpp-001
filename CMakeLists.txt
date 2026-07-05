@@ -38,6 +38,14 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(nlohmann_json)
 
+# 接入 cpp-httplib（轻量 HTTP 库，最小改动）
+FetchContent_Declare(
+  httplib
+  GIT_REPOSITORY https://github.com/yhirose/cpp-httplib.git
+  GIT_TAG        v0.18.1
+)
+FetchContent_MakeAvailable(httplib)
+
 # Main executable - thin startup only (per rules)
 add_executable(cpp-001
     src/main.cpp
@@ -120,3 +128,16 @@ target_include_directories(test_json PRIVATE
 target_link_libraries(test_json PRIVATE nlohmann_json::nlohmann_json)
 
 add_test(NAME json_test COMMAND test_json)
+
+# HTTP test (cpp-httplib)
+add_executable(test_httplib
+    tests/test_httplib.cpp
+)
+
+target_include_directories(test_httplib PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+target_link_libraries(test_httplib PRIVATE httplib::httplib)
+
+add_test(NAME httplib_test COMMAND test_httplib)
