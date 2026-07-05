@@ -5,6 +5,7 @@
 
 ## 当前任务
 
+- [ ] build: 接入 spdlog 做日志（基于 fmt）
 - [x] build: 接入 fmt 做格式化（build: 接入 fmt）
 - [x] docs: 更新 LEARNING_NOTES 添加 std::filesystem 条目 + 全局记忆
 - [x] feat: 标准库专项 - filesystem 练习（添加最小 FilesystemUtils，使用 std::filesystem 获取路径，带单元测试）
