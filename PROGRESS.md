@@ -160,3 +160,9 @@
 - 目标：添加纯 C++17 Result 类型到 common，提高错误处理。
 - 执行：include/common/Result.hpp (variant 实现)，tests/test_result.cpp。
 - 验证：result_test 通过，所有 8 个测试 100%。
+
+## 2026-07-06 feat: 添加 Result<T,E> 错误处理封装（common）
+
+- 目标：纯 C++ 实现 Result 用于错误处理。
+- 执行：variant 模板，测试通过。
+- 验证：8 个测试全绿。
