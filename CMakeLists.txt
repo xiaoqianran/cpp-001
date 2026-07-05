@@ -30,6 +30,14 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(tomlplusplus)
 
+# 接入 yaml-cpp（配置库）
+FetchContent_Declare(
+  yaml-cpp
+  GIT_REPOSITORY https://github.com/jbeder/yaml-cpp.git
+  GIT_TAG        0.8.0
+)
+FetchContent_MakeAvailable(yaml-cpp)
+
 # 接入 nlohmann/json（序列化库，最小改动）
 FetchContent_Declare(
   nlohmann_json
@@ -175,3 +183,12 @@ target_include_directories(test_result PRIVATE
 )
 
 add_test(NAME result_test COMMAND test_result)
+
+# yaml-cpp test
+add_executable(test_yaml
+    tests/test_yaml.cpp
+)
+
+target_include_directories(test_yaml PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_link_libraries(test_yaml PRIVATE yaml-cpp::yaml-cpp)
+add_test(NAME yaml_test COMMAND test_yaml)
