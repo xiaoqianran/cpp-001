@@ -12,7 +12,7 @@ int main() {
     assert(!ok.is_err());
     assert(ok.value() == 42);
 
-    common::Result<int, std::string> err("failure");
+    common::Result<int, std::string> err(false, std::string("failure"));
     assert(!err.is_ok());
     assert(err.is_err());
     assert(err.error() == "failure");

@@ -9,18 +9,21 @@ int main() {
 
     logger.log(common::LogLevel::Info, "cpp-001 C++ backend starting...");
 
-    // 薄集成：使用 toml++ Config 加载演示配置
+    // 薄集成：使用 toml++ Config 加载演示配置，返回 Result
     std::string demo_toml = R"(
         app_name = "cpp-001"
         port = 8080
     )";
     common::Config cfg(demo_toml);
 
-    if (auto name = cfg.get_string("app_name")) {
-        logger.log(common::LogLevel::Info, "[config] app_name = " + *name);
+    auto name_res = cfg.get_string("app_name");
+    if (name_res.is_ok()) {
+        logger.log(common::LogLevel::Info, "[config] app_name = " + name_res.value());
     }
-    if (auto port = cfg.get_int("port")) {
-        logger.log(common::LogLevel::Info, "[config] port = " + std::to_string(*port));
+
+    auto port_res = cfg.get_int("port");
+    if (port_res.is_ok()) {
+        logger.log(common::LogLevel::Info, "[config] port = " + std::to_string(port_res.value()));
     }
 
     logger.log(common::LogLevel::Info, "[log] Logger + spdlog/fmt initialized.");

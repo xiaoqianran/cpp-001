@@ -166,3 +166,9 @@
 - 目标：纯 C++ 实现 Result 用于错误处理。
 - 执行：variant 模板，测试通过。
 - 验证：8 个测试全绿。
+
+## 2026-07-06 feat: 使用 Result 改进 Config 返回（common）
+
+- 目标：将 Config 的 get 方法从 optional 改为 Result，提高错误处理显式性。
+- 执行：更新 Config.hpp/cpp 使用 Result<std::string,std::string> 和 Result<int,std::string>；修复 Result 实现避免歧义；更新 test_config 和 main 使用新 API。
+- 验证：config_test + result_test 通过，main 运行正常输出配置。

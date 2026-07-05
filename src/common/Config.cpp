@@ -6,18 +6,18 @@ Config::Config(std::string_view toml_content) {
     tbl_ = toml::parse(toml_content);
 }
 
-std::optional<std::string> Config::get_string(std::string_view key) const {
+Result<std::string, std::string> Config::get_string(std::string_view key) const {
     if (auto val = tbl_[key].value<std::string>()) {
-        return *val;
+        return Result<std::string, std::string>(*val);
     }
-    return std::nullopt;
+    return Result<std::string, std::string>(false, std::string("key not found: ") + std::string(key));
 }
 
-std::optional<int> Config::get_int(std::string_view key) const {
+Result<int, std::string> Config::get_int(std::string_view key) const {
     if (auto val = tbl_[key].value<int>()) {
-        return *val;
+        return Result<int, std::string>(*val);
     }
-    return std::nullopt;
+    return Result<int, std::string>(false, std::string("key not found or wrong type: ") + std::string(key));
 }
 
 } // namespace common
