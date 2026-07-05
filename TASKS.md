@@ -5,7 +5,8 @@
 
 ## 当前任务
 
-- [ ] build: 接入 cpp-httplib 做 HTTP（build: 接入 cpp-httplib）
+- [ ] build: 接入 SQLiteCpp 做数据库（build: 接入 SQLiteCpp）
+- [x] build: 接入 cpp-httplib 做 HTTP（build: 接入 cpp-httplib）
 - [x] build: 接入 nlohmann/json 做序列化（build: 接入 nlohmann/json）
 - [x] build: 接入 toml++ 做配置（build: 接入 toml++）
 - [x] build: 接入 spdlog 做日志（基于 fmt）
