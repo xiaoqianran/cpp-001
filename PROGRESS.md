@@ -98,3 +98,10 @@
   - fmt 支持 C++17，header-only 模式友好。
 - 验证：ctest 100% 通过，主程序和测试正常运行，fmt 成功集成。
 - 全局记忆已更新。
+
+## 2026-07-06 build: 接入 spdlog 做日志（基于 fmt）
+
+- 目标：引入 spdlog 作为真实日志后端，基于 fmt，保持测试兼容。
+- 执行：worktree task/spdlog，CMake FetchContent spdlog v1.14.1，Logger 混合实现（默认 spdlog console，测试路径保留 fmt），测试通过，commit 合并。
+- 学习要点：spdlog 依赖 fmt、sink 机制、pattern、level 映射、与现有 ostream 注入兼容的混合策略。
+- 验证：ctest 100%。
