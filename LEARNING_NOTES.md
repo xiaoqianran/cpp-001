@@ -509,3 +509,17 @@ and_then（用于返回新 Result 的操作）。
 
 ### 注意
 atomic 不是万能的，复杂状态仍需 mutex 或 lock-free 算法。
+
+## 层级：Repository 示例
+
+### 职责
+数据访问层，封装 SQL 操作，返回 Result 或 throw 转 Result。
+
+### 本示例
+- 使用 SQLiteCpp RAII（Database, Statement）。
+- :memory: 数据库便于测试。
+- 未来可包装成返回 Result 的方法。
+
+### 架构提示
+- repository 只做数据，不含业务逻辑。
+- 与 model 结合使用。

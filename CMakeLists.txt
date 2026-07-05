@@ -210,3 +210,14 @@ add_executable(test_atomic
 target_include_directories(test_atomic PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 add_test(NAME atomic_test COMMAND test_atomic)
+
+# Minimal repository example test (SQLiteCpp + memory DB)
+add_executable(test_repo
+    tests/test_repo.cpp
+)
+
+target_include_directories(test_repo PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+target_link_libraries(test_repo PRIVATE SQLiteCpp sqlite3)
+
+add_test(NAME repo_test COMMAND test_repo)
