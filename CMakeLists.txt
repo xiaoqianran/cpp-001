@@ -5,6 +5,15 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+# 接入 fmt（build 任务，最小改动）：使用 FetchContent 拉取轻量 fmt 库（header-only 友好）
+include(FetchContent)
+FetchContent_Declare(
+  fmt
+  GIT_REPOSITORY https://github.com/fmtlib/fmt.git
+  GIT_TAG        10.2.1
+)
+FetchContent_MakeAvailable(fmt)
+
 # Main executable - thin startup only (per rules)
 add_executable(cpp-001
     src/main.cpp
@@ -14,6 +23,7 @@ add_executable(cpp-001
 target_include_directories(cpp-001 PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
+target_link_libraries(cpp-001 PRIVATE fmt::fmt)
 
 # Enable testing with ctest (native, no external test framework for bootstrap)
 enable_testing()
@@ -40,6 +50,7 @@ add_executable(test_logger
 target_include_directories(test_logger PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
+target_link_libraries(test_logger PRIVATE fmt::fmt)
 
 add_test(NAME logger_test COMMAND test_logger)
 

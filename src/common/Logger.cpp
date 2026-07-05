@@ -1,5 +1,7 @@
 #include "common/Logger.hpp"
 
+#include <fmt/format.h>
+
 #include <iomanip>
 #include <sstream>
 
@@ -28,9 +30,7 @@ std::string Logger::format_timestamp() const {
 }
 
 void Logger::log(LogLevel level, std::string_view message) {
-    out << '[' << format_timestamp() << "] "
-        << '[' << level_to_string(level) << "] "
-        << message << '\n';
+    out << fmt::format("[{}] [{}] {}\n", format_timestamp(), level_to_string(level), message);
 }
 
 std::string_view level_to_string(LogLevel level) {

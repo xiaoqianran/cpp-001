@@ -5,7 +5,7 @@
 
 ## 当前任务
 
-- [ ] build: 接入 fmt 做格式化（build: 接入 fmt）
+- [x] build: 接入 fmt 做格式化（build: 接入 fmt）
 - [x] docs: 更新 LEARNING_NOTES 添加 std::filesystem 条目 + 全局记忆
 - [x] feat: 标准库专项 - filesystem 练习（添加最小 FilesystemUtils，使用 std::filesystem 获取路径，带单元测试）
 - [x] feat: main 中集成 Logger（保持极薄启动，仅初始化演示 + 时间戳输出）
@@ -14,6 +14,8 @@
 - [x] bootstrap: 初始化 C++ 后端项目骨架、八个文档、目录结构、最小 CMake + 真实单元测试（Status value type in common）
 
 ## 已完成
+
+- build: 接入 fmt 做格式化 (2026-07-06): 使用 FetchContent 引入 fmt 10.2.1，最小 CMake 改动，Logger 使用 fmt::format 重构日志输出，构建测试全绿，commit 合并。
 
 - bootstrap (2026-07-06): 创建 worktree、结构、Status 纯逻辑单元、main 薄启动、CMake、测试通过、文档、commit 合并。
 

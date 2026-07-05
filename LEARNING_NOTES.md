@@ -131,3 +131,44 @@ assert(!cwd.empty());
 现代 C++ 后端必备基础。适合学习和轻量工具；重度文件操作可考虑更高层库。
 
 未来每个库都必须有这样结构化的笔记。
+
+## 库名：fmt
+
+### 所属分类
+格式化、日志、配置（来自 awesome-cpp 格式化库分类）。
+
+### 解决的问题
+提供现代、高性能、类型安全的字符串格式化，替代 printf/iostream 手动拼接，解决格式化代码繁琐、类型不安全问题。
+
+### 本项目如何使用
+- CMakeLists.txt：添加 FetchContent_Declare + MakeAvailable(fmt)，target_link_libraries 到 main 和 test_logger。
+- src/common/Logger.cpp：引入 <fmt/format.h>，log() 函数改用 fmt::format 构造日志行。
+- 保持最小改动规则，所有测试通过。
+
+### 最小示例
+```cpp
+#include <fmt/format.h>
+std::string line = fmt::format("[{}] [{}] {}\n", timestamp, level, message);
+out << line;
+```
+
+### C++ 知识点
+- CMake FetchContent（现代依赖管理，无需外部包管理器）。
+- 模板元编程（fmt 核心是编译期格式字符串检查）。
+- 头文件 vs 链接（fmt 可 header-only 或编译库）。
+- string_view 高效传参与 fmt 兼容。
+- 值语义友好。
+
+### 常见坑
+- Git clone 大小（FetchContent 会下载整个 repo，CI 需注意缓存）。
+- 版本选择（10.2.1 稳定，与 C++17 完美兼容）。
+- 链接时需 fmt::fmt（静态库 libfmtd.a 在 Debug）。
+- 平台 localtime_r 仍保留（fmt 不处理时间格式化）。
+
+### 替代方案
+- std::format (C++20)：标准但支持晚，编译器支持不全。
+- Boost.Format：重量级。
+- spdlog（后续会引入，内部使用 fmt）。
+
+### 结论
+适合所有需要格式化的后端项目，轻量、零依赖、现代 C++ 首选。几乎无不适合场景，是 fmt 成为事实标准的原因。

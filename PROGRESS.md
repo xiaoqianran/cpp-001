@@ -80,3 +80,21 @@
 ## 总结
 
 初始模板 + Logger 集成 + std::filesystem 练习完成。持续小步推进中。
+
+## 2026-07-06 build: 接入 fmt 做格式化
+
+- 目标：使用 CMake FetchContent 接入 fmt 库，实现格式化功能替换 Logger 中的手动字符串拼接。
+- 执行：
+  - 创建 worktree cpp-001-task-fmt (branch task/fmt)
+  - 最小修改 CMakeLists.txt：添加 FetchContent fmt 10.2.1，target_link_libraries 到 cpp-001 和 test_logger。
+  - 修改 Logger.cpp：添加 <fmt/format.h>，log() 使用 fmt::format 输出日志行。
+  - worktree 内 cmake -S . -B build && cmake --build build && ctest 全绿（包括 fmt 编译）。
+  - build commit，合并回 main，删除 worktree。
+  - 更新 TASKS.md / PROGRESS.md。
+- 学习要点（C++ 知识）：
+  - FetchContent 是现代 CMake 标准方式引入第三方库（无 vcpkg/conan）。
+  - fmt::format 提供类型安全、高性能格式化，替代 ostringstream 拼接。
+  - 头文件包含和链接最小改动保持规则。
+  - fmt 支持 C++17，header-only 模式友好。
+- 验证：ctest 100% 通过，主程序和测试正常运行，fmt 成功集成。
+- 全局记忆已更新。
