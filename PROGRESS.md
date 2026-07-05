@@ -208,3 +208,9 @@
 - 目标：练习基础并发。
 - 执行：ThreadSafeCounter + 多线程测试。
 - 验证：concurrency_test 100% 通过。
+
+## 2026-07-06 feat: 标准库并发 - 添加 AtomicCounter（std::atomic 练习）
+
+- 目标：对比 mutex 与 atomic。
+- 执行：AtomicCounter（relaxed memory order）+ 相同多线程测试。
+- 验证：atomic_test 通过。

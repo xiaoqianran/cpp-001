@@ -494,3 +494,18 @@ and_then（用于返回新 Result 的操作）。
 
 ### 下一步
 可扩展到 ThreadPool、condition_variable、atomic。
+
+## 标准库：std::atomic 计数器
+
+### 与 mutex 版本对比
+- AtomicCounter：无锁，fetch_add + load。
+- 内存序：relaxed（本例足够，因为只有计数）。
+- 性能：通常比 mutex 好，尤其高争用。
+
+### 学习要点
+- std::atomic<T>
+- memory_order_relaxed / acquire / release
+- 何时用 atomic vs mutex（简单计数 vs 复杂临界区）
+
+### 注意
+atomic 不是万能的，复杂状态仍需 mutex 或 lock-free 算法。

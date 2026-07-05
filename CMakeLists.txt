@@ -201,3 +201,12 @@ add_executable(test_concurrency
 target_include_directories(test_concurrency PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 add_test(NAME concurrency_test COMMAND test_concurrency)
+
+# Atomic counter (std::atomic 练习)
+add_executable(test_atomic
+    tests/test_atomic.cpp
+)
+
+target_include_directories(test_atomic PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+add_test(NAME atomic_test COMMAND test_atomic)
