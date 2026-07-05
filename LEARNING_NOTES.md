@@ -539,3 +539,19 @@ atomic 不是万能的，复杂状态仍需 mutex 或 lock-free 算法。
 ### 架构衔接
 - server 层可封装这个 Server。
 - 后续可结合 router/controller。
+
+## 架构：Server 层
+
+### 职责
+- 生命周期管理（listen/stop）。
+- 路由注册抽象。
+- 隐藏底层 httplib 细节。
+
+### 实现细节
+- 使用 std::thread 后台运行。
+- atomic running 标志。
+- 可扩展 route 方法支持更多 HTTP 方法。
+
+### 下一步
+- 结合 router 层做动态路由。
+- 与 main 薄集成（只组装）。

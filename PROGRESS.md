@@ -244,3 +244,9 @@
 - 目标：HTTP 阶段进阶。
 - 执行：线程中启动 server + client 自测。
 - 验证：httpserver_test 通过。
+
+## 2026-07-06 feat: 添加 server 层骨架（简单封装 httplib::Server）
+
+- 目标：按照 ARCHITECTURE 分层实现 server 层。
+- 执行：include/server/Server.hpp + src/server/Server.cpp 封装 listen/route/stop。
+- 验证：server_layer_test 通过。

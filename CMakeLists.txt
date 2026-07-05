@@ -232,3 +232,17 @@ target_include_directories(test_httpserver PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/i
 target_link_libraries(test_httpserver PRIVATE httplib::httplib)
 
 add_test(NAME httpserver_test COMMAND test_httpserver)
+
+# Server layer skeleton
+add_executable(test_server
+    src/server/Server.cpp
+    tests/test_server.cpp
+)
+
+target_include_directories(test_server PRIVATE 
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+target_link_libraries(test_server PRIVATE httplib::httplib)
+
+add_test(NAME server_layer_test COMMAND test_server)
