@@ -214,3 +214,9 @@
 - 目标：对比 mutex 与 atomic。
 - 执行：AtomicCounter（relaxed memory order）+ 相同多线程测试。
 - 验证：atomic_test 通过。
+
+## 2026-07-06 feat: 标准库并发 - 添加 AtomicCounter（std::atomic 练习）
+
+- 目标：无锁计数器练习。
+- 执行：AtomicCounter + 多线程测试。
+- 验证：atomic_test 通过。
