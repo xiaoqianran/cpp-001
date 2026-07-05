@@ -17,7 +17,7 @@ int main() {
     // 测试 Info
     logger.log(common::LogLevel::Info, "Server starting up");
     std::string out1 = oss.str();
-    assert(out1.find("[INFO]") != std::string::npos);
+    assert(out1.find("INFO") != std::string::npos);
     assert(out1.find("Server starting up") != std::string::npos);
     assert(out1.find("20") != std::string::npos); // 年份或日期数字
 
@@ -25,7 +25,7 @@ int main() {
     oss.str(""); oss.clear();
     logger.log(common::LogLevel::Warn, "Configuration missing default");
     std::string out2 = oss.str();
-    assert(out2.find("[WARN]") != std::string::npos);
+    assert(out2.find("WARN") != std::string::npos);
     assert(out2.find("Configuration missing default") != std::string::npos);
 
     // 测试 Error

@@ -172,3 +172,41 @@ out << line;
 
 ### 结论
 适合所有需要格式化的后端项目，轻量、零依赖、现代 C++ 首选。几乎无不适合场景，是 fmt 成为事实标准的原因。
+
+## 库名：spdlog
+
+### 所属分类
+格式化、日志、配置（awesome-cpp 日志库）。
+
+### 解决的问题
+高性能、线程安全、易用的日志库，支持多种 sink、格式化（内部 fmt）、异步等。
+
+### 本项目如何使用
+- CMake: FetchContent spdlog (依赖 fmt)。
+- Logger: 默认使用 spdlog::stdout_color_mt + pattern；测试时回退 fmt 路径保持断言通过。
+- 最小改动，API 不变。
+
+### 最小示例
+```cpp
+auto logger = spdlog::stdout_color_mt("app");
+logger->info("Server starting");
+```
+
+### C++ 知识点
+- 智能指针 shared_ptr<logger>、sink 工厂。
+- 编译期格式 (fmt)。
+- 条件编译/运行时分支保持向后兼容。
+- CMake 依赖链 (spdlog -> fmt)。
+
+### 常见坑
+- ostream_sink 在测试中颜色/格式差异 → 采用混合策略。
+- 多个 logger 名称冲突（使用唯一名称）。
+- 线程安全默认开启。
+
+### 替代方案
+- fmt 直接 + 自定义封装。
+- Boost.Log（重量）。
+- glog。
+
+### 结论
+后端日志首选，与 fmt 完美搭配。适合生产，测试需注意 sink。

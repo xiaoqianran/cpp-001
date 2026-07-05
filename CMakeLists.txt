@@ -14,6 +14,14 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(fmt)
 
+# 接入 spdlog（基于 fmt，最小改动）
+FetchContent_Declare(
+  spdlog
+  GIT_REPOSITORY https://github.com/gabime/spdlog.git
+  GIT_TAG        v1.14.1
+)
+FetchContent_MakeAvailable(spdlog)
+
 # Main executable - thin startup only (per rules)
 add_executable(cpp-001
     src/main.cpp
@@ -24,6 +32,7 @@ target_include_directories(cpp-001 PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 target_link_libraries(cpp-001 PRIVATE fmt::fmt)
+target_link_libraries(cpp-001 PRIVATE spdlog::spdlog)
 
 # Enable testing with ctest (native, no external test framework for bootstrap)
 enable_testing()
@@ -51,6 +60,7 @@ target_include_directories(test_logger PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 target_link_libraries(test_logger PRIVATE fmt::fmt)
+target_link_libraries(test_logger PRIVATE spdlog::spdlog)
 
 add_test(NAME logger_test COMMAND test_logger)
 
