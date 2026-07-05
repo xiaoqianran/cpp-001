@@ -113,3 +113,10 @@
 - 学习要点：toml++ 现代 C++17 API（table、value<T>）、header-only、in-memory parse 便于测试、类型安全 optional。
 - 验证：新增 config_test 通过，所有测试 100%。
 - 文档更新：LEARNING_NOTES + TASKS + PROGRESS。
+
+## 2026-07-06 build: 接入 nlohmann/json 做序列化
+
+- 目标：引入 nlohmann/json 作为 JSON 序列化库。
+- 执行：worktree task/json，FetchContent nlohmann/json v3.11.3，新增 tests/test_json.cpp 直接练习 parse/dump，全部测试通过。
+- 学习要点：现代 C++ JSON（operator[]、dump、parse）、header-only、多平台。
+- 验证：json_test 通过，总测试 100%。

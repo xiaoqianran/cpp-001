@@ -251,3 +251,43 @@ auto port = tbl["port"].value<int>();
 
 ### 结论
 后端配置首选之一，轻量现代。非常适合当前阶段学习 CMake + 配置加载。
+
+## 库名：nlohmann/json
+
+### 所属分类
+JSON / 序列化（awesome-cpp 序列化方向）。
+
+### 解决的问题
+直观、现代、高性能的 JSON 解析与序列化，单头文件。
+
+### 本项目如何使用
+- CMake: FetchContent nlohmann/json v3.11.3。
+- tests/test_json.cpp：使用 nlohmann::json 构造、dump、parse 验证。
+- 后续可用于 model/DTO 序列化、HTTP body 等。
+
+### 最小示例
+```cpp
+using json = nlohmann::json;
+json j = {{"key", 42}};
+std::string s = j.dump();
+json j2 = json::parse(s);
+```
+
+### C++ 知识点
+- 用户定义字面量、模板特化。
+- 异常 vs 错误码（可选）。
+- 移动语义友好。
+- CMake FetchContent 单头文件集成。
+
+### 常见坑
+- 包含路径：nlohmann/json.hpp
+- 大对象性能（但对大多数后端够用）。
+- 版本 v3.x 稳定。
+
+### 替代方案
+- RapidJSON（更快更底层）。
+- simdjson（极快解析）。
+- protobuf（二进制强类型）。
+
+### 结论
+后端 JSON 事实标准之一。非常适合学习序列化。
