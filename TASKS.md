@@ -5,7 +5,9 @@
 
 ## 当前任务
 
+- [x] feat: 添加 router 层骨架（简单路由表）
 - [x] feat: 添加 server 层骨架（简单封装 httplib::Server）
+
 - [x] feat: 添加最小 HTTP server 示例（使用 cpp-httplib）
 
 - [x] feat: repository 层最小示例（使用 SQLiteCpp + Result）

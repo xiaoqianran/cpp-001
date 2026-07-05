@@ -262,3 +262,9 @@
 - 目标：实现 router 层职责。
 - 执行：Router 类 + add_route/dispatch。
 - 验证：router_layer_test 通过。
+
+## 2026-07-06 feat: 添加 router 层骨架（简单路由表）
+
+- 目标：router 层实现。
+- 执行：add_route + dispatch 演示。
+- 验证：router_layer_test 通过。
