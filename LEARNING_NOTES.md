@@ -424,3 +424,34 @@ if (res.is_ok()) {
     log(res.error());
 }
 ```
+
+## 库名：yaml-cpp
+
+### 所属分类
+格式化、日志、配置。
+
+### 解决的问题
+解析和生成 YAML 格式的配置文件，人性化可读。
+
+### 本项目如何使用
+- FetchContent 接入。
+- tests/test_yaml.cpp 演示 Load + as<T>。
+- 与 toml++ 对比，可选支持多种配置格式。
+
+### 最小示例
+```cpp
+YAML::Node config = YAML::Load(yaml_str);
+std::string name = config["server"]["name"].as<std::string>();
+```
+
+### C++ 知识点
+- 第三方库集成。
+- 节点树遍历。
+- 类型转换。
+
+### 常见坑
+- 构建时间较长（静态库）。
+- 错误处理通过异常或 IsDefined() 检查。
+
+### 结论
+适合人类编辑的配置场景，与 toml++ 互补。

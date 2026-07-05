@@ -178,3 +178,9 @@
 - 目标：将 Config get 方法改为使用 Result（显式错误处理）。
 - 执行：更新 Config / Result / test / main；修复 Result 歧义问题。
 - 验证：config_test、result_test 通过，main 正常运行。
+
+## 2026-07-06 build: 接入 yaml-cpp 做配置
+
+- 目标：引入 yaml-cpp 作为另一种配置格式库。
+- 执行：FetchContent 0.8.0，tests/test_yaml.cpp 演示 YAML 解析。
+- 验证：yaml_test 通过。
