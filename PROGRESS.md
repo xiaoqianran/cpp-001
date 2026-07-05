@@ -69,6 +69,14 @@
 - 验证：ctest 100%，主程序输出正确格式日志。
 - 全局记忆更新。
 
+## 2026-07-06 feat: 标准库专项 - filesystem 练习
+
+- 目标：练习 std::filesystem，添加最小 FilesystemUtils（current_working_directory）。
+- 执行：新 worktree、实现 .hpp/.cpp + 测试（直接调用真实实现）、最小 CMake 添加 test、构建测试 100% 通过、feat commit、合并。
+- 学习要点：std::filesystem::current_path() 简单易用；返回 string 值语义；测试直接链接 .cpp 。
+- 验证：新增 filesystem_test 通过。
+- 全局记忆已更新。
+
 ## 总结
 
-初始模板 + std 专项（Logger + main 集成）完成。后续每次只推进一个明确小任务 + 更新文档 + commit。
+初始模板 + Logger 集成 + std::filesystem 练习完成。持续小步推进中。
