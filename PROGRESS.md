@@ -120,3 +120,10 @@
 - 执行：worktree task/json，FetchContent nlohmann/json v3.11.3，新增 tests/test_json.cpp 直接练习 parse/dump，全部测试通过。
 - 学习要点：现代 C++ JSON（operator[]、dump、parse）、header-only、多平台。
 - 验证：json_test 通过，总测试 100%。
+
+## 2026-07-06 build: 接入 cpp-httplib 做 HTTP
+
+- 目标：引入轻量 cpp-httplib 作为 HTTP 入门库。
+- 执行：FetchContent v0.18.1，test_httplib 演示 server/client 交互，构建测试全绿。
+- 学习要点：单头文件 HTTP server/client、路由 lambda、线程启动。
+- 验证：httplib_test 通过。

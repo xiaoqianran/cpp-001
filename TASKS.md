@@ -18,6 +18,8 @@
 
 ## 已完成
 
+- build: 接入 cpp-httplib 做 HTTP (2026-07-06): FetchContent cpp-httplib v0.18.1，tests/test_httplib.cpp 演示 Server + Client 基本交互，测试通过。
+
 - build: 接入 nlohmann/json 做序列化 (2026-07-06): FetchContent nlohmann/json v3.11.3，测试直接使用 nlohmann::json 解析/序列化，构建测试全绿。
 
 - build: 接入 toml++ 做配置 (2026-07-06): FetchContent tomlplusplus v3.4.0，新增 common::Config 最小封装，支持字符串/整数获取，带单元测试，全绿。

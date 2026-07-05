@@ -291,3 +291,41 @@ json j2 = json::parse(s);
 
 ### 结论
 后端 JSON 事实标准之一。非常适合学习序列化。
+
+## 库名：cpp-httplib
+
+### 所属分类
+HTTP / Web 框架（awesome-cpp Web 服务器方向）。
+
+### 解决的问题
+极轻量单头文件 HTTP/1.1 server 和 client。
+
+### 本项目如何使用
+- CMake FetchContent cpp-httplib。
+- tests/test_httplib.cpp：最小 Server + Client 示例。
+- 未来可用于 router / server 层基础。
+
+### 最小示例
+```cpp
+httplib::Server svr;
+svr.Get("/ping", [](auto&, auto& res){ res.set_content("pong", "text/plain"); });
+svr.listen("0.0.0.0", 8080);
+```
+
+### C++ 知识点
+- Lambda + 回调。
+- 线程 + 同步（listen 在线程）。
+- 头文件 only 库。
+
+### 常见坑
+- 必须 stop() 才能 join 线程。
+- 端口占用、sleep 启动等待。
+- 生产建议用更成熟框架（Crow/Drogon）。
+
+### 替代方案
+- Crow（类似但更多功能）。
+- Boost.Beast（更底层强大）。
+- cpp-httplib 适合学习和原型。
+
+### 结论
+极佳的 HTTP 学习起点，轻量无依赖。
