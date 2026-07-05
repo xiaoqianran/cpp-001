@@ -5,7 +5,7 @@
 
 ## 当前任务
 
-- [ ] build: 接入 yaml-cpp 做配置（build: 接入 yaml-cpp）
+- [x] build: 接入 yaml-cpp 做配置（build: 接入 yaml-cpp）
 - [x] feat: 使用 Result 改进 Config 返回（common）
 
 - [x] feat: 添加 Result<T,E> 错误处理封装（common）

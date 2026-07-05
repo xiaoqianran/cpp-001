@@ -184,3 +184,9 @@
 - 目标：引入 yaml-cpp 作为另一种配置格式库。
 - 执行：FetchContent 0.8.0，tests/test_yaml.cpp 演示 YAML 解析。
 - 验证：yaml_test 通过。
+
+## 2026-07-06 build: 接入 yaml-cpp 做配置
+
+- 目标：完成阶段 3 配置库，引入 yaml-cpp。
+- 执行：FetchContent 0.8.0，test_yaml 演示解析。
+- 验证：yaml_test 通过。
