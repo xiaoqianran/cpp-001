@@ -221,3 +221,14 @@ target_include_directories(test_repo PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include
 target_link_libraries(test_repo PRIVATE SQLiteCpp sqlite3)
 
 add_test(NAME repo_test COMMAND test_repo)
+
+# Minimal HTTP server example
+add_executable(test_httpserver
+    tests/test_httpserver.cpp
+)
+
+target_include_directories(test_httpserver PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+target_link_libraries(test_httpserver PRIVATE httplib::httplib)
+
+add_test(NAME httpserver_test COMMAND test_httpserver)

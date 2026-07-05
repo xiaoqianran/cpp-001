@@ -232,3 +232,9 @@
 - 目标：为后续分层打基础。
 - 执行：test_repo 演示 SQLiteCpp 基本用法。
 - 验证：repo_test 通过。
+
+## 2026-07-06 feat: 添加最小 HTTP server 示例（使用 cpp-httplib）
+
+- 目标：演示 HTTP server + client 在测试中的使用。
+- 执行：Server 设置 /hello handler，线程中 listen，Client 请求验证。
+- 验证：httpserver_test 通过。

@@ -523,3 +523,19 @@ atomic 不是万能的，复杂状态仍需 mutex 或 lock-free 算法。
 ### 架构提示
 - repository 只做数据，不含业务逻辑。
 - 与 model 结合使用。
+
+## 库/实践：cpp-httplib Server 示例
+
+### 关键用法
+- httplib::Server 注册 Get/Post handler。
+- listen 在单独线程，避免阻塞测试。
+- Client 用于自测。
+- stop() + join() 清理。
+
+### 注意事项
+- 端口冲突：使用固定端口 + sleep 启动。
+- 生产中考虑优雅关闭、线程池。
+
+### 架构衔接
+- server 层可封装这个 Server。
+- 后续可结合 router/controller。
