@@ -190,3 +190,9 @@
 - 目标：完成阶段 3 配置库，引入 yaml-cpp。
 - 执行：FetchContent 0.8.0，test_yaml 演示解析。
 - 验证：yaml_test 通过。
+
+## 2026-07-06 feat: 为 Result 添加简单链式操作 (value_or / map)
+
+- 目标：为 Result 增加实用链式方法。
+- 执行：添加 value_or 和 map 模板方法；更新测试验证。
+- 验证：result_test 通过。

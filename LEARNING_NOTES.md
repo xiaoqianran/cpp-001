@@ -455,3 +455,21 @@ std::string name = config["server"]["name"].as<std::string>();
 
 ### 结论
 适合人类编辑的配置场景，与 toml++ 互补。
+
+## Result 增强：链式操作
+
+### 添加的方法
+- `value_or(default)`：错误时返回默认值。
+- `map(f)`：成功时转换值类型，返回新 Result。
+
+### 设计要点
+- 模板 + decltype 推导新类型。
+- 错误路径保持原 E 类型。
+
+### 用途
+```cpp
+auto port = cfg.get_int("port").map([](int p){ return p * 10; }).value_or(8080);
+```
+
+### 下一步可扩展
+and_then（用于返回新 Result 的操作）。

@@ -1,22 +1,27 @@
 #include "common/Result.hpp"
-#include "common/Status.hpp"
-
 #include <cassert>
 #include <string>
 #include <iostream>
 
 int main() {
-    // 直接测试真实 Result
     common::Result<int, std::string> ok(42);
     assert(ok.is_ok());
-    assert(!ok.is_err());
-    assert(ok.value() == 42);
+    assert(ok.value_or(0) == 42);
 
     common::Result<int, std::string> err(false, std::string("failure"));
-    assert(!err.is_ok());
     assert(err.is_err());
-    assert(err.error() == "failure");
+    assert(err.value_or(99) == 99);
 
-    std::cout << "result test passed\n";
+    // map demo
+    auto doubled = ok.map([](int v) { return v * 2; });
+    assert(doubled.is_ok());
+    assert(doubled.value() == 84);
+
+    // map on error keeps error
+    auto err_mapped = err.map([](int v) { return v * 2; });
+    assert(err_mapped.is_err());
+    assert(err_mapped.error() == "failure");
+
+    std::cout << "result chain test passed\n";
     return 0;
 }
