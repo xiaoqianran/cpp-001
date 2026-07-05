@@ -54,4 +54,13 @@
 
 在每个阶段完成后，更新本文件标记已完成库，并为下个库设计小任务。
 
-当前阶段：1 已完成。下一阶段开始前先更新 TASKS.md 选定第一个库 demo。
+当前阶段：
+- 阶段1 基础模板：完成
+- 阶段2 标准库专项：部分（filesystem, chrono 已用）
+- 阶段3 格式化、日志、配置：**完成** (fmt, spdlog, toml++)
+- 阶段4 JSON/序列化：**完成** (nlohmann/json)
+- 阶段5 HTTP/Web：**入门完成** (cpp-httplib)
+- 阶段6 数据库：**入门完成** (SQLiteCpp)
+
+下一建议：继续并发/异步 或 完善 repository 示例，或下一个库 yaml-cpp / simdjson。
+

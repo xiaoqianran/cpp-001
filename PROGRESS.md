@@ -140,3 +140,17 @@
 - 目标：将已接入的 Config + Logger 薄集成到 main.cpp（遵守规则）。
 - 执行：更新 CMake 为 cpp-001 添加 Config.cpp 和 toml link；main.cpp 加载 demo toml 并日志输出。
 - 验证：./build/cpp-001 成功输出配置值，所有 ctest 100%。
+
+## 2026-07-06 总结：阶段3-5 库集成 + 薄集成
+
+已自主完成多个小步任务（无用户干预）：
+- fmt + spdlog（日志/格式化）
+- toml++（配置）
+- nlohmann/json（序列化）
+- cpp-httplib（HTTP）
+- SQLiteCpp（数据库）
+- 薄 main 集成 Config + Logger 演示
+
+所有任务：worktree -> build -> test 100% -> commit -> merge -> docs。
+当前测试：7 个通过。
+项目状态：干净，main 可运行，显示配置加载。
