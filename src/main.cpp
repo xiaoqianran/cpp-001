@@ -1,25 +1,32 @@
 #include "common/Logger.hpp"
+#include "common/Config.hpp"
 
 // NOTE: main.cpp follows strict rule - ONLY startup, config assembly, logs, server lifecycle.
 // NO business logic, NO controllers, NO services here.
 
 int main() {
-    common::Logger logger;  // 使用 common::Logger 进行启动日志（极薄集成）
+    common::Logger logger;
 
     logger.log(common::LogLevel::Info, "cpp-001 C++ backend starting...");
 
-    // Stub: assemble config (later from src/config/)
-    logger.log(common::LogLevel::Info, "[config] Configuration loaded (stub).");
+    // 薄集成：使用 toml++ Config 加载演示配置
+    std::string demo_toml = R"(
+        app_name = "cpp-001"
+        port = 8080
+    )";
+    common::Config cfg(demo_toml);
 
-    // Stub: initialize logging
-    logger.log(common::LogLevel::Info, "[log] Logger initialized.");
+    if (auto name = cfg.get_string("app_name")) {
+        logger.log(common::LogLevel::Info, "[config] app_name = " + *name);
+    }
+    if (auto port = cfg.get_int("port")) {
+        logger.log(common::LogLevel::Info, "[config] port = " + std::to_string(*port));
+    }
 
-    // Stub: server lifecycle (later in src/server/)
+    logger.log(common::LogLevel::Info, "[log] Logger + spdlog/fmt initialized.");
     logger.log(common::LogLevel::Info, "[server] Server starting (stub)...");
-    logger.log(common::LogLevel::Info, "[server] Listening on 0.0.0.0:8080 (stub).");
 
-    // In real: server.run() would block here.
-    logger.log(common::LogLevel::Info, "cpp-001 ready (stub - bootstrap).");
+    logger.log(common::LogLevel::Info, "cpp-001 ready (thin integration demo).");
 
     return 0;
 }

@@ -134,3 +134,9 @@
 - 执行：FetchContent，test_sqlite 使用 :memory: 执行 DDL/DML，验证通过。
 - 学习要点：RAII Database/Statement、参数绑定、列获取。
 - 验证：sqlite_test 通过。
+
+## 2026-07-06 feat: 薄 main 集成配置+日志演示
+
+- 目标：将已接入的 Config + Logger 薄集成到 main.cpp（遵守规则）。
+- 执行：更新 CMake 为 cpp-001 添加 Config.cpp 和 toml link；main.cpp 加载 demo toml 并日志输出。
+- 验证：./build/cpp-001 成功输出配置值，所有 ctest 100%。
