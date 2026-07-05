@@ -202,3 +202,9 @@
 - 目标：练习 std::thread + std::mutex。
 - 执行：添加 ThreadSafeCounter 头文件 + 多线程测试。
 - 验证：concurrency_test 通过（4线程各增1000次，结果正确）。
+
+## 2026-07-06 feat: 标准库专项 - 并发练习（添加 ThreadSafeCounter）
+
+- 目标：练习基础并发。
+- 执行：ThreadSafeCounter + 多线程测试。
+- 验证：concurrency_test 100% 通过。

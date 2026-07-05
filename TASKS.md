@@ -5,7 +5,11 @@
 
 ## 当前任务
 
+- [x] feat: 标准库专项 - 并发练习（添加 ThreadSafeCounter，使用 std::mutex）
+- [x] feat: 为 Result 添加简单链式操作 (and_then / map)
+
 - [x] build: 接入 yaml-cpp 做配置（build: 接入 yaml-cpp）
+
 - [x] feat: 使用 Result 改进 Config 返回（common）
 
 - [x] feat: 添加 Result<T,E> 错误处理封装（common）
@@ -25,6 +29,8 @@
 - [x] bootstrap: 初始化 C++ 后端项目骨架、八个文档、目录结构、最小 CMake + 真实单元测试（Status value type in common）
 
 ## 已完成
+
+- feat: 为 Result 添加简单链式操作 (value_or / map) (2026-07-06): 增加 value_or 和 map 模板方法，提升 Result 易用性。
 
 - feat: 添加 Result<T,E> 错误处理封装（common） (2026-07-06): 基于 std::variant 的最小 Result，实现 is_ok/value/error，带测试。
 

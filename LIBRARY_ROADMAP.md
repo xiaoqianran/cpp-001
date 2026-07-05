@@ -56,7 +56,7 @@
 
 当前阶段：
 - 阶段1 基础模板：完成
-- 阶段2 标准库专项：部分（filesystem, chrono 已用）
+- 阶段2 标准库专项：部分（filesystem, chrono, 基础并发 ThreadSafeCounter 已用）
 - 阶段3 格式化、日志、配置：**完成** (fmt, spdlog, toml++, yaml-cpp)
 - 阶段4 JSON/序列化：**完成** (nlohmann/json)
 - 阶段5 HTTP/Web：**入门完成** (cpp-httplib)
