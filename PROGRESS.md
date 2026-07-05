@@ -196,3 +196,9 @@
 - 目标：为 Result 增加实用链式方法。
 - 执行：添加 value_or 和 map 模板方法；更新测试验证。
 - 验证：result_test 通过。
+
+## 2026-07-06 feat: 标准库专项 - 并发练习（添加 ThreadSafeCounter）
+
+- 目标：练习 std::thread + std::mutex。
+- 执行：添加 ThreadSafeCounter 头文件 + 多线程测试。
+- 验证：concurrency_test 通过（4线程各增1000次，结果正确）。

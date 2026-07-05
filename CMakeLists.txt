@@ -192,3 +192,12 @@ add_executable(test_yaml
 target_include_directories(test_yaml PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 target_link_libraries(test_yaml PRIVATE yaml-cpp::yaml-cpp)
 add_test(NAME yaml_test COMMAND test_yaml)
+
+# Concurrency practice (std::thread + mutex)
+add_executable(test_concurrency
+    tests/test_concurrency.cpp
+)
+
+target_include_directories(test_concurrency PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+add_test(NAME concurrency_test COMMAND test_concurrency)

@@ -473,3 +473,24 @@ auto port = cfg.get_int("port").map([](int p){ return p * 10; }).value_or(8080);
 
 ### 下一步可扩展
 and_then（用于返回新 Result 的操作）。
+
+## 标准库：并发基础（ThreadSafeCounter）
+
+### 解决的问题
+线程安全共享状态，避免 data race。
+
+### 实现要点
+- std::mutex + std::lock_guard（RAII）。
+- mutable mutex 用于 const 方法。
+- uint64_t 计数。
+
+### 测试策略
+多线程并发增量 + join + 最终断言。
+
+### 常见坑
+- 忘记 lock_guard 导致 race。
+- 在 const 方法上需要 mutable。
+- 锁粒度：这里是细粒度 per 操作。
+
+### 下一步
+可扩展到 ThreadPool、condition_variable、atomic。
