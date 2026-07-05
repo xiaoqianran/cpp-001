@@ -127,3 +127,10 @@
 - 执行：FetchContent v0.18.1，test_httplib 演示 server/client 交互，构建测试全绿。
 - 学习要点：单头文件 HTTP server/client、路由 lambda、线程启动。
 - 验证：httplib_test 通过。
+
+## 2026-07-06 build: 接入 SQLiteCpp 做数据库
+
+- 目标：引入 SQLiteCpp 进行数据库练习。
+- 执行：FetchContent，test_sqlite 使用 :memory: 执行 DDL/DML，验证通过。
+- 学习要点：RAII Database/Statement、参数绑定、列获取。
+- 验证：sqlite_test 通过。

@@ -20,6 +20,8 @@
 
 ## 已完成
 
+- build: 接入 SQLiteCpp 做数据库 (2026-07-06): FetchContent SQLiteCpp 3.3.1 + sqlite3，in-memory DB 测试，CRUD 演示，测试通过。
+
 - build: 接入 cpp-httplib 做 HTTP (2026-07-06): FetchContent cpp-httplib v0.18.1，tests/test_httplib.cpp 演示 Server + Client 基本交互，测试通过。
 
 - build: 接入 nlohmann/json 做序列化 (2026-07-06): FetchContent nlohmann/json v3.11.3，测试直接使用 nlohmann::json 解析/序列化，构建测试全绿。
