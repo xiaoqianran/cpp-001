@@ -365,3 +365,41 @@ db.exec("CREATE TABLE ...");
 
 ### 结论
 轻量嵌入式 DB 很好起点。
+
+## C++ 概念：Result<T, E>（错误处理）
+
+### 所属分类
+标准库专项 / 错误处理（C++17 variant + optional 模式）。
+
+### 解决的问题
+类型安全的错误返回，替代异常或 out-param，鼓励显式处理。
+
+### 本项目如何使用
+- include/common/Result.hpp
+- tests/test_result.cpp 演示 ok/err 分支。
+- 未来可用于 repository / service 返回。
+
+### 最小示例
+```cpp
+Result<int, std::string> r = 42; // ok
+if (r.is_ok()) { use(r.value()); }
+```
+
+### C++ 知识点
+- std::variant（类型安全 union）。
+- 值语义、移动。
+- 模板。
+- 替代 C++23 std::expected。
+
+### 常见坑
+- variant 访问需检查 holds_alternative 或使用 visit。
+- 错误类型设计（string vs enum）。
+
+### 替代方案
+- std::optional（只成功/无值）。
+- 异常。
+- std::expected (C++23)。
+- Boost.Outcome。
+
+### 结论
+强烈推荐在后端 common 层使用，提升健壮性。

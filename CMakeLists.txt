@@ -164,3 +164,14 @@ target_include_directories(test_sqlite PRIVATE
 target_link_libraries(test_sqlite PRIVATE SQLiteCpp sqlite3)
 
 add_test(NAME sqlite_test COMMAND test_sqlite)
+
+# Result test (标准库 + variant 实现)
+add_executable(test_result
+    tests/test_result.cpp
+)
+
+target_include_directories(test_result PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+add_test(NAME result_test COMMAND test_result)
