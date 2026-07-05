@@ -1,0 +1,26 @@
+# TASKS.md — 任务队列 (cpp-001)
+
+本文件跟踪待办、进行中和已完成的小步可验证任务。
+每个任务必须：能构建、能测试、能提交、能总结。
+
+## 当前任务
+
+- [x] bootstrap: 初始化 C++ 后端项目骨架、八个文档、目录结构、最小 CMake + 真实单元测试（Status value type in common）
+
+## 已完成
+
+- bootstrap (2026-07-06): 创建 worktree、结构、Status 纯逻辑单元、main 薄启动、CMake、测试通过、文档、commit 合并。
+
+## 待办队列（按推荐顺序，小步）
+
+1. `feat: 基础日志封装` （引入或封装简单日志，后续接入 spdlog）
+2. `docs: 完善 ARCHITECTURE.md 各层详细职责`
+3. 标准库专项小功能（e.g. filesystem 练习）
+4. 接入 fmt 做格式化（build: 接入 fmt）
+5. ... (后续从 LIBRARY_ROADMAP 按阶段拆分)
+
+## 规则
+
+- 永远从 TASKS.md 挑选**最小**可完成任务。
+- 完成一个任务后立即更新本文件 + PROGRESS.md + git commit。
+- 禁止大任务或跨阶段混合。
