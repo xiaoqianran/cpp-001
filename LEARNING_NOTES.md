@@ -555,3 +555,15 @@ atomic 不是万能的，复杂状态仍需 mutex 或 lock-free 算法。
 ### 下一步
 - 结合 router 层做动态路由。
 - 与 main 薄集成（只组装）。
+
+## 架构：Router 层
+
+### 职责
+路径到 handler 的注册与分发。
+
+### 当前实现
+- 简单 vector 线性查找（适合学习）。
+- 未来可换为 map 或 trie。
+
+### 与 Server 配合
+Server 可持有 Router，收到请求后 dispatch。

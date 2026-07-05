@@ -246,3 +246,13 @@ target_include_directories(test_server PRIVATE
 target_link_libraries(test_server PRIVATE httplib::httplib)
 
 add_test(NAME server_layer_test COMMAND test_server)
+
+# Router layer skeleton
+add_executable(test_router
+    src/router/Router.cpp
+    tests/test_router.cpp
+)
+
+target_include_directories(test_router PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+add_test(NAME router_layer_test COMMAND test_router)

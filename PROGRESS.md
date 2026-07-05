@@ -256,3 +256,9 @@
 - 目标：实现分层中的 server 职责。
 - 执行：Server 类封装 listen/route/stop + 测试。
 - 验证：server_layer_test 通过。
+
+## 2026-07-06 feat: 添加 router 层骨架（简单路由表）
+
+- 目标：实现 router 层职责。
+- 执行：Router 类 + add_route/dispatch。
+- 验证：router_layer_test 通过。
