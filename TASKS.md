@@ -22,6 +22,8 @@
 
 ## 已完成
 
+- feat: 添加 Result<T,E> 错误处理封装（common） (2026-07-06): 基于 std::variant 的最小 Result，实现 is_ok/value/error，带测试。
+
 - feat: 薄 main 集成配置+日志演示 (2026-07-06): main.cpp 使用 Config (toml++) + Logger (spdlog/fmt)，CMake 添加 Config.cpp 和 link，运行验证通过，测试全绿。
 
 - build: 接入 SQLiteCpp 做数据库 (2026-07-06): FetchContent SQLiteCpp 3.3.1 + sqlite3，in-memory DB 测试，CRUD 演示，测试通过。

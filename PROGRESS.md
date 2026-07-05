@@ -154,3 +154,9 @@
 所有任务：worktree -> build -> test 100% -> commit -> merge -> docs。
 当前测试：7 个通过。
 项目状态：干净，main 可运行，显示配置加载。
+
+## 2026-07-06 feat: 添加 Result<T,E> 错误处理封装（common）
+
+- 目标：添加纯 C++17 Result 类型到 common，提高错误处理。
+- 执行：include/common/Result.hpp (variant 实现)，tests/test_result.cpp。
+- 验证：result_test 通过，所有 8 个测试 100%。
