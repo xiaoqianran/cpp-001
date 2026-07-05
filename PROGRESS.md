@@ -172,3 +172,9 @@
 - 目标：将 Config 的 get 方法从 optional 改为 Result，提高错误处理显式性。
 - 执行：更新 Config.hpp/cpp 使用 Result<std::string,std::string> 和 Result<int,std::string>；修复 Result 实现避免歧义；更新 test_config 和 main 使用新 API。
 - 验证：config_test + result_test 通过，main 运行正常输出配置。
+
+## 2026-07-06 feat: 使用 Result 改进 Config 返回（common）
+
+- 目标：将 Config get 方法改为使用 Result（显式错误处理）。
+- 执行：更新 Config / Result / test / main；修复 Result 歧义问题。
+- 验证：config_test、result_test 通过，main 正常运行。

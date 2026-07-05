@@ -5,7 +5,7 @@
 
 ## 当前任务
 
-- [ ] feat: 使用 Result 改进 Config 返回（common）
+- [x] feat: 使用 Result 改进 Config 返回（common）
 - [x] feat: 添加 Result<T,E> 错误处理封装（common）
 
 - [x] feat: 薄 main 集成配置+日志演示
