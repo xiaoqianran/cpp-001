@@ -238,3 +238,9 @@
 - 目标：演示 HTTP server + client 在测试中的使用。
 - 执行：Server 设置 /hello handler，线程中 listen，Client 请求验证。
 - 验证：httpserver_test 通过。
+
+## 2026-07-06 feat: 添加最小 HTTP server 示例（使用 cpp-httplib）
+
+- 目标：HTTP 阶段进阶。
+- 执行：线程中启动 server + client 自测。
+- 验证：httpserver_test 通过。
