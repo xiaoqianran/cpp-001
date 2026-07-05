@@ -58,6 +58,7 @@ FetchContent_MakeAvailable(SQLiteCpp)
 add_executable(cpp-001
     src/main.cpp
     src/common/Logger.cpp
+    src/common/Config.cpp
 )
 
 target_include_directories(cpp-001 PRIVATE
@@ -65,6 +66,7 @@ target_include_directories(cpp-001 PRIVATE
 )
 target_link_libraries(cpp-001 PRIVATE fmt::fmt)
 target_link_libraries(cpp-001 PRIVATE spdlog::spdlog)
+target_link_libraries(cpp-001 PRIVATE tomlplusplus::tomlplusplus)
 
 # Enable testing with ctest (native, no external test framework for bootstrap)
 enable_testing()

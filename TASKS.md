@@ -20,6 +20,8 @@
 
 ## 已完成
 
+- feat: 薄 main 集成配置+日志演示 (2026-07-06): main.cpp 使用 Config (toml++) + Logger (spdlog/fmt)，CMake 添加 Config.cpp 和 link，运行验证通过，测试全绿。
+
 - build: 接入 SQLiteCpp 做数据库 (2026-07-06): FetchContent SQLiteCpp 3.3.1 + sqlite3，in-memory DB 测试，CRUD 演示，测试通过。
 
 - build: 接入 cpp-httplib 做 HTTP (2026-07-06): FetchContent cpp-httplib v0.18.1，tests/test_httplib.cpp 演示 Server + Client 基本交互，测试通过。
