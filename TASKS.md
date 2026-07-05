@@ -5,6 +5,7 @@
 
 ## 当前任务
 
+- [ ] feat: 添加 Result<T,E> 错误处理封装（common）
 - [x] feat: 薄 main 集成配置+日志演示
 - [x] build: 接入 SQLiteCpp 做数据库（build: 接入 SQLiteCpp）
 - [x] build: 接入 cpp-httplib 做 HTTP（build: 接入 cpp-httplib）
