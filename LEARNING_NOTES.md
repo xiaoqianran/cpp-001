@@ -91,3 +91,43 @@ assert(oss.str().find("[INFO]") != std::string::npos);
 非常适合 bootstrap 和学习阶段。生产后端推荐替换为 spdlog + fmt。易于演进（Logger 接口可保持）。
 
 未来每个库都必须有这样结构化的笔记。
+
+## 标准库：std::filesystem
+
+### 所属分类
+C++ 标准库专项（filesystem）—— 对应推荐阶段 2。
+
+### 解决的问题
+跨平台路径操作、文件系统查询（cwd、存在性、遍历等）。
+
+### 本项目如何使用
+- 新增 include/common/FilesystemUtils.hpp + src/common/FilesystemUtils.cpp
+- tests/test_filesystem.cpp 直接测试 current_working_directory()
+- CMake 添加 test_filesystem target
+
+### 最小示例
+```cpp
+std::string cwd = common::current_working_directory();
+assert(!cwd.empty());
+```
+
+### C++ 知识点
+- std::filesystem (current_path, path/string 转换)
+- 值语义返回 std::string
+- C++17 标准库特性
+- CMake 链接真实 .cpp 实现
+
+### 常见坑
+- filesystem 需要 C++17 支持，某些旧编译器需链接 stdc++fs（现代 gcc/clang 通常内置）。
+- 路径编码/平台差异（Windows vs Unix）。
+- 异常 vs error_code 重载（本实现用简单版本）。
+
+### 替代方案
+- Boost.Filesystem （更老但兼容）
+- 手动字符串操作（易错）
+- 第三方如 ghc::filesystem （header-only 兼容）
+
+### 结论
+现代 C++ 后端必备基础。适合学习和轻量工具；重度文件操作可考虑更高层库。
+
+未来每个库都必须有这样结构化的笔记。

@@ -5,7 +5,8 @@
 
 ## 当前任务
 
-- [ ] feat: 标准库专项 - filesystem 练习（添加最小 FilesystemUtils，使用 std::filesystem 获取路径，带单元测试）
+- [ ] docs: 更新 LEARNING_NOTES 添加 std::filesystem 条目 + 全局记忆
+- [x] feat: 标准库专项 - filesystem 练习（添加最小 FilesystemUtils，使用 std::filesystem 获取路径，带单元测试）
 - [x] feat: main 中集成 Logger（保持极薄启动，仅初始化演示 + 时间戳输出）
 - [x] docs: 完善 ARCHITECTURE.md 各层详细职责（记录 Logger 横切关注点）
 - [x] feat: 基础日志封装（在 common 中添加最小 Logger，使用 std::chrono / ostream 起步，带单元测试，可构建可运行）
