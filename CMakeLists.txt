@@ -8,6 +8,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # Main executable - thin startup only (per rules)
 add_executable(cpp-001
     src/main.cpp
+    src/common/Logger.cpp
 )
 
 target_include_directories(cpp-001 PRIVATE
