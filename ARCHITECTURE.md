@@ -3,12 +3,12 @@
 ## 总体分层（严格遵守）
 
 ```
-main.cpp (仅组装 + 启动)
+main.cpp (仅组装 + 启动、日志初始化存根)
     |
     v
-server/     -> 生命周期、启动停止
+server/     -> 生命周期、启动/停止
 router/     -> 路由注册与分发
-controller/ -> I/O 转换（请求/响应）
+controller/ -> 请求/响应 I/O 转换（无业务逻辑）
     |
     v
 service/    -> 业务逻辑（纯函数或类）
@@ -20,22 +20,38 @@ repository/ -> 数据访问抽象
 model/      -> 实体、DTO、值对象
 ```
 
-横切：
+横切关注点（common 层）：
 
 * `config/` ：配置加载、校验、默认值（绝不硬编码）
-* `common/` ：Status/Result、错误码、日志包装、工具函数（值语义优先）
-* `tests/`  ：直接测试各层真实实现
+* `common/` ：
+  - `Status`：错误/结果处理（值语义、工厂方法、无异常路径）
+  - `Logger`：日志（std::chrono 时间戳 + ostream 注入，易测试）
+  - 其他工具函数（未来扩展）
+  - 原则：仅标准库、值语义优先、RAII、无裸指针
+* `tests/`  ：直接测试各层真实实现（链接 .cpp 而非 mock）
 
-## 当前状态（bootstrap）
+横切原则：common 是最底层，被上层依赖但不反向依赖。Logger 等可被所有层使用，但当前仅在测试中验证。
 
-- 只有薄 main + common::Status 作为错误处理基础。
-- 所有其他目录为空占位，等待后续任务按阶段填充。
-- 禁止将逻辑放在 main.cpp 或 controller 中。
+## 当前状态
+
+- 薄 main（仅启动、配置组装、日志初始化存根、server 生命周期）。
+- common/ 层已包含：
+  - `Status`：值语义错误处理（RAII 友好、无裸指针）。
+  - `Logger`：最小日志封装（基于 std::chrono 时间戳 + ostream 注入，支持 Debug/Info/Warn/Error 级别）。
+- 所有目录结构就位（含 .gitkeep），等待后续按阶段填充业务层。
+- 禁止将业务逻辑放在 main.cpp 或 controller 中（严格分层）。
 
 ## 模块边界原则
 
-- 每一层只知道下一层的接口。
-- common 是最底层，无其他项目依赖。
-- 业务逻辑绝不直接依赖 HTTP 框架或 DB 驱动细节（通过抽象）。
+- 每一层只知道下一层的接口（严格单向依赖）。
+- common 是最底层，仅依赖标准库（C++17），无其他项目依赖。
+- 业务逻辑绝不直接依赖框架细节（通过 repository/service 抽象）。
+- common 组件（Status/Logger）采用值语义 + 依赖注入，便于单元测试和未来替换（例如 Logger → spdlog）。
+- 演进路径见 LIBRARY_ROADMAP.md（当前处于“标准库专项”阶段）。
+
+## 演进记录
+- bootstrap：Status + 基础骨架
+- feat/logger：添加 Logger（chrono + ostream），更新本架构文档
+- 未来：引入 fmt / spdlog 时更新 common 抽象边界
 
 未来演进在 LIBRARY_ROADMAP.md 阶段中体现。
