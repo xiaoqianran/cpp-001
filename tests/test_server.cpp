@@ -1,4 +1,5 @@
 #include "server/Server.hpp"
+#include "controller/Controller.hpp"
 #include <httplib.h>
 #include <cassert>
 #include <iostream>
@@ -7,9 +8,11 @@
 
 int main() {
     server::Server app;
+    controller::Controller ctrl;
 
-    app.route("GET", "/hello", [](const httplib::Request&, httplib::Response& res) {
-        res.set_content("Server layer OK", "text/plain");
+    // 使用完整分层链路：server -> router -> controller -> service -> model
+    app.route("GET", "/hello", [&ctrl](const httplib::Request& req, httplib::Response& res) {
+        ctrl.handle_status(req, res);
     });
 
     app.listen("127.0.0.1", 18081);
@@ -22,8 +25,8 @@ int main() {
     app.stop();
 
     assert(res && res->status == 200);
-    assert(res->body == "Server layer OK");
+    assert(res->body == "service layer OK");
 
-    std::cout << "server layer test passed\n";
+    std::cout << "server e2e full chain test passed\n";
     return 0;
 }

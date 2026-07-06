@@ -362,3 +362,9 @@
 - 目标：Server 使用 Router 进行路由调度。
 - 执行：route() 添加到 router_；listen() 调用 router_.apply_to(svr_) 让 httplib 使用 router 提供的 handlers 进行调度。
 - 验证：test_server + test_router 通过；代码已有集成点注释。
+
+## 2026-07-06 feat: 更新 test_server 使用完整分层链路 (controller + service + model)
+
+- 目标：server test 演示完整链路。
+- 执行：test_server 使用 Controller 注册 route，链路 server->router->controller->service->model。
+- 验证：server_layer_test 通过，返回 "service layer OK"。

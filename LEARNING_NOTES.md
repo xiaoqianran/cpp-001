@@ -697,3 +697,14 @@ router → controller → service → model
 ### 好处
 - 分层清晰：Server 生命周期 + 线程，Router 路由表 + 调度逻辑。
 - 未来可扩展 router 为 trie 或正则，不影响 Server。
+
+## 端到端集成演示
+
+### test_server 现在演示完整链路
+- Server 注册 route (通过 router)
+- Controller handle_status 调用 Service
+- Service 返回 model::Status
+- 响应来自 model 数据
+
+### 验证
+一次测试覆盖多层集成。
