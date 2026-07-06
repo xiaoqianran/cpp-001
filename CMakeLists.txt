@@ -268,3 +268,12 @@ target_include_directories(test_controller PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/i
 
 target_link_libraries(test_controller PRIVATE httplib::httplib)
 add_test(NAME controller_layer_test COMMAND test_controller)
+
+# Service layer skeleton (minimal)
+add_executable(test_service
+    tests/test_service.cpp
+)
+
+target_include_directories(test_service PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+add_test(NAME service_layer_test COMMAND test_service)

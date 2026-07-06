@@ -595,3 +595,33 @@ Server 可持有 Router，收到请求后 dispatch。
 
 ### 集成路径
 controller -> router/server
+
+## 架构：Service 层
+
+### 职责
+- 封装核心业务逻辑（独立于 HTTP、数据库、框架）。
+- 提供可复用的纯函数或类方法。
+- 返回 Result<T,E> 或简单值，便于错误处理和测试。
+
+### 当前骨架
+- 最小 Service 类：get_status() 返回 Result<string,string> ，echo() 返回 string。
+- 使用 common::Result 演示。
+- 虚析构，便于未来多态/继承（e.g. UserService）。
+
+### 集成路径
+controller -> service -> repository (未来)
+service 层不依赖 httplib 等上层框架。
+
+## 架构：Service 层
+
+### 职责
+- 纯业务逻辑，不涉及 HTTP、DB、框架。
+- 返回 Result 或领域值。
+- 可被 controller 调用。
+
+### 当前实现
+- Service::get_status() → Result<std::string>
+- Service::echo(input) → 简单业务处理
+
+### 后续
+- 具体业务 service 可继承或组合 repository。

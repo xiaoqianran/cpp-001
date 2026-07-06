@@ -5,6 +5,8 @@
 
 ## 当前任务
 
+- [x] feat: 添加 service 层骨架（业务逻辑封装）
+
 - [x] feat: 添加 controller 层骨架（简单请求/响应处理）
 - [x] feat: 集成 Router 到 Server 层（Server 持有 Router）
 
