@@ -5,6 +5,7 @@
 
 ## 当前任务
 
+- [x] feat: 在 controller 中调用 service（简单集成）
 - [x] feat: 添加 service 层骨架（业务逻辑封装）
 
 - [x] feat: 添加 controller 层骨架（简单请求/响应处理）

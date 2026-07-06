@@ -314,3 +314,9 @@
 - 目标：展示 controller 调用 service 层。
 - 执行：Controller::handle_status 内部创建 Service，调用 get_status()，设置响应和 status=200。
 - 验证：controller_layer_test 通过，body 和 status 正确。
+
+## 2026-07-06 feat: 在 controller 中调用 service（简单集成）
+
+- 目标：演示 controller 层调用 service 层。
+- 执行：Controller 内部调用 Service::get_status()，显式设置 status=200。
+- 验证：controller_layer_test 通过。
