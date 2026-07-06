@@ -380,3 +380,9 @@
 - 目标：router 支持 {param} 路径匹配 skeleton。
 - 执行：添加 matches() 简单前缀/后缀检查；test 注册 /users/{id}。
 - 验证：router_layer_test 通过。
+
+## 2026-07-06 feat: router 添加简单路径参数支持 (skeleton)
+
+- 目标：router 支持 {param}。
+- 执行：matches() 简单实现；test 验证 /users/{id}。
+- 验证：router_layer_test 通过。

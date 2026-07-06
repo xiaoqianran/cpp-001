@@ -5,6 +5,7 @@
 
 ## 当前任务
 
+- [x] feat: router 添加简单路径参数支持 (skeleton)
 - [x] feat: 更新 test_server 使用完整分层链路 (controller + service + model)
 - [x] feat: server 层使用 router 调度
 - [x] feat: 添加 router 注册 controller handler 示例
