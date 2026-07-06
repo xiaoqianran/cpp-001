@@ -625,3 +625,14 @@ service 层不依赖 httplib 等上层框架。
 
 ### 后续
 - 具体业务 service 可继承或组合 repository。
+
+## 集成示例：Controller 调用 Service
+
+### 要点
+- Controller 负责 HTTP 相关（响应构造）。
+- Service 负责业务逻辑（get_status 返回 Result）。
+- 集成非常薄：controller 直接 new Service（真实项目中可注入）。
+
+### 改进方向
+- 使用依赖注入（构造函数传 Service&）。
+- Controller 不创建 Service 实例（更好解耦）。

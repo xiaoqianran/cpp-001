@@ -11,7 +11,10 @@ int main() {
 
     ctrl.handle_status(req, res);
 
-    assert(res.body == "controller layer OK");
-    std::cout << "controller layer test passed\n";
+    // 现在验证 controller 调用了 service
+    assert(res.body == "service layer OK");
+    assert(res.status == 200);
+
+    std::cout << "controller + service integration test passed\n";
     return 0;
 }
