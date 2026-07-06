@@ -356,3 +356,9 @@
 - 目标：router 层注册 controller handler。
 - 执行：test_router 中注册调用 controller 的 handler。
 - 验证：router_layer_test 通过，完整分层演示。
+
+## 2026-07-06 feat: server 层使用 router 调度
+
+- 目标：Server 使用 Router 进行路由调度。
+- 执行：route() 添加到 router_；listen() 调用 router_.apply_to(svr_) 让 httplib 使用 router 提供的 handlers 进行调度。
+- 验证：test_server + test_router 通过；代码已有集成点注释。

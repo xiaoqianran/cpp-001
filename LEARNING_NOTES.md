@@ -685,3 +685,15 @@ Status { message, healthy }
 
 ### 架构进展
 router → controller → service → model
+
+## 集成：Server 使用 Router 调度
+
+### 当前实现
+- Server 持有 Router。
+- route() 委托给 router.add_route。
+- listen() 调用 router.apply_to 让 httplib 使用 router 管理的 handlers 进行实际请求调度。
+- 保持了 httplib 的高性能匹配，同时 router 层负责表管理。
+
+### 好处
+- 分层清晰：Server 生命周期 + 线程，Router 路由表 + 调度逻辑。
+- 未来可扩展 router 为 trie 或正则，不影响 Server。
