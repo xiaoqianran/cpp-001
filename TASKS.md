@@ -5,6 +5,7 @@
 
 ## 当前任务
 
+- [x] feat: 添加 router 注册 controller handler 示例
 - [x] feat: service 层使用 model::Status（返回模型）
 - [x] feat: 添加简单 model 层骨架（数据传输对象）
 - [x] feat: 在 controller 中调用 service（简单集成）
