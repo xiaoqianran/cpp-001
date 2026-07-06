@@ -290,3 +290,9 @@
 - 目标：引入 controller 层概念。
 - 执行：Controller 基类示例 + handle_status；独立测试。
 - 验证：controller_layer_test 通过。
+
+## 2026-07-06 feat: 添加 controller 层骨架（简单请求/响应处理）
+
+- 目标：controller 层引入。
+- 执行：基类 + 测试。
+- 验证：controller_layer_test 通过。

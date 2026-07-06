@@ -5,7 +5,9 @@
 
 ## 当前任务
 
+- [x] feat: 添加 controller 层骨架（简单请求/响应处理）
 - [x] feat: 集成 Router 到 Server 层（Server 持有 Router）
+
 - [x] feat: 添加 router 层骨架（简单路由表）
 
 - [x] feat: 添加 server 层骨架（简单封装 httplib::Server）
