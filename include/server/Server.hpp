@@ -6,15 +6,17 @@
 #include <thread>
 #include <atomic>
 
+#include "router/Router.hpp"
+
 namespace server {
 
 /**
  * 最小 server 层封装（基于 cpp-httplib）。
- * 职责：启动/停止 HTTP server，注册路由。
+ * 现在持有 Router 层进行路由管理。
  */
 class Server {
 public:
-    using Handler = std::function<void(const httplib::Request&, httplib::Response&)>;
+    using Handler = router::Handler;  // 复用 Router 的 Handler
 
     Server();
     ~Server();
@@ -25,6 +27,7 @@ public:
 
 private:
     httplib::Server svr_;
+    router::Router router_;
     std::thread server_thread_;
     std::atomic<bool> running_{false};
 };

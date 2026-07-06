@@ -236,6 +236,7 @@ add_test(NAME httpserver_test COMMAND test_httpserver)
 # Server layer skeleton
 add_executable(test_server
     src/server/Server.cpp
+    src/router/Router.cpp
     tests/test_server.cpp
 )
 
@@ -255,4 +256,5 @@ add_executable(test_router
 
 target_include_directories(test_router PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
+target_link_libraries(test_router PRIVATE httplib::httplib)
 add_test(NAME router_layer_test COMMAND test_router)

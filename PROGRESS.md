@@ -268,3 +268,13 @@
 - 目标：router 层实现。
 - 执行：add_route + dispatch 演示。
 - 验证：router_layer_test 通过。
+
+## 2026-07-06 feat: 集成 Router 到 Server 层（Server 持有 Router）
+
+- 目标：将 router 层集成到 server 层，Server 持有并使用 Router 管理路由。
+- 执行：
+  - 升级 Router 支持真实 httplib Handler + apply_to 方法。
+  - Server 添加 router_ 成员，route() 委托给 router，listen() 调用 apply_to 后再启动。
+  - 更新 test_router 使用真实 Handler。
+  - 调整 CMake 确保链接。
+- 验证：server_layer_test 和 router_layer_test 均通过。

@@ -567,3 +567,17 @@ atomic 不是万能的，复杂状态仍需 mutex 或 lock-free 算法。
 
 ### 与 Server 配合
 Server 可持有 Router，收到请求后 dispatch。
+
+## 集成实践：Server 持有 Router
+
+### 变化
+- Router 现在使用与 Server 一致的 Handler 类型。
+- Router 提供 apply_to(httplib::Server&) 用于将路由表应用到底层。
+- Server 不再直接注册到 svr_，而是通过 router_ 收集 + apply。
+
+### 架构收益
+- 分离关注点：Server 负责生命周期，Router 负责路由表。
+- 便于未来扩展（多个 router、middleware 等）。
+
+### 待改进
+- dispatch 方法目前未在运行时使用（直接 handler 注册更高效），但为测试/未来预留。
