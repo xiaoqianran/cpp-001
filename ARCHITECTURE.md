@@ -55,3 +55,20 @@ model/      -> 实体、DTO、值对象
 - 未来：引入 fmt / spdlog 时更新 common 抽象边界
 
 未来演进在 LIBRARY_ROADMAP.md 阶段中体现。
+
+## 已实现分层状态 (2026-07-06)
+
+- common: Result<T,E> + Status 示例
+- config: 骨架 (早期)
+- repository: SQLiteCpp 示例 (早期)
+- server: 生命周期 + thread + router 持有 + apply_to 调度
+- router: 线性表 + dispatch + apply_to + {param} skeleton + GET/POST/PUT/DELETE
+- controller: handle + 调用 service
+- service: 业务 + 返回 model::Status
+- model: Status DTO
+
+集成测试:
+- test_server: 完整链路
+- test_router: controller + param + 多方法
+
+原则遵守: 薄 main, 分层单向, 值语义, 小步验证。

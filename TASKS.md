@@ -5,6 +5,7 @@
 
 ## 当前任务
 
+- [x] feat: 添加/更新 ARCHITECTURE.md 总结当前分层
 - [x] feat: router/server 支持 PUT/DELETE 等方法
 - [x] feat: router 添加简单路径参数支持 (skeleton)
 - [x] feat: 更新 test_server 使用完整分层链路 (controller + service + model)
