@@ -392,3 +392,9 @@
 - 目标：扩展 router 支持更多 HTTP 方法。
 - 执行：apply_to 添加 PUT/DELETE；test 添加 POST 示例。
 - 验证：router_layer_test 通过。
+
+## 2026-07-06 feat: router/server 支持 PUT/DELETE 等方法
+
+- 目标：扩展 HTTP 方法支持。
+- 执行：apply_to + test POST 示例。
+- 验证：通过。
