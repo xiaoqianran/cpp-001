@@ -581,3 +581,17 @@ Server 可持有 Router，收到请求后 dispatch。
 
 ### 待改进
 - dispatch 方法目前未在运行时使用（直接 handler 注册更高效），但为测试/未来预留。
+
+## 架构：Controller 层
+
+### 职责
+- 接收来自 router/server 的请求。
+- 解析输入、调用 service 层。
+- 构造响应。
+
+### 当前骨架
+- 虚函数示例 handle_status。
+- 未来可继承具体 controller（如 StatusController）。
+
+### 集成路径
+controller -> router/server

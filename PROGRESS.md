@@ -284,3 +284,9 @@
 - 目标：Server 持有 Router，实现分层集成。
 - 执行：Router 升级真实 Handler + apply_to；Server 委托路由；CMake 调整；测试通过。
 - 验证：两个层测试 100% 通过。
+
+## 2026-07-06 feat: 添加 controller 层骨架（简单请求/响应处理）
+
+- 目标：引入 controller 层概念。
+- 执行：Controller 基类示例 + handle_status；独立测试。
+- 验证：controller_layer_test 通过。

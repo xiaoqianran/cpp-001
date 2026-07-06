@@ -258,3 +258,13 @@ target_include_directories(test_router PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/inclu
 
 target_link_libraries(test_router PRIVATE httplib::httplib)
 add_test(NAME router_layer_test COMMAND test_router)
+
+# Controller layer skeleton (minimal)
+add_executable(test_controller
+    tests/test_controller.cpp
+)
+
+target_include_directories(test_controller PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+target_link_libraries(test_controller PRIVATE httplib::httplib)
+add_test(NAME controller_layer_test COMMAND test_controller)
