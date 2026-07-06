@@ -374,3 +374,9 @@
 - 目标：server test 演示完整集成链路。
 - 执行：注册 controller handler，链路覆盖 server/router/controller/service/model。
 - 验证：server_layer_test 通过。
+
+## 2026-07-06 feat: router 添加简单路径参数支持 (skeleton)
+
+- 目标：router 支持 {param} 路径匹配 skeleton。
+- 执行：添加 matches() 简单前缀/后缀检查；test 注册 /users/{id}。
+- 验证：router_layer_test 通过。

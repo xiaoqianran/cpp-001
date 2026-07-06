@@ -708,3 +708,13 @@ router → controller → service → model
 
 ### 验证
 一次测试覆盖多层集成。
+
+## Router 路径参数 skeleton
+
+### 实现
+- matches() 处理含 {param} 的路径（简单 prefix + suffix 检查）。
+- 支持 /users/{id} 匹配 /users/42 等。
+- 未提取参数值（未来可扩展 Route 存 params，dispatch 传递）。
+
+### 学习
+- 路由匹配是常见后端难题，skeleton 先演示思路，后续可升级为正则或 trie。
