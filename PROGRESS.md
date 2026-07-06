@@ -302,3 +302,9 @@
 - 目标：添加 service 层，封装业务逻辑（使用 Result 返回）。
 - 执行：include/service/Service.hpp（get_status + echo），tests/test_service.cpp。
 - 验证：service_layer_test 通过。
+
+## 2026-07-06 feat: 添加 service 层骨架（业务逻辑封装）
+
+- 目标：引入 service 层，纯业务逻辑 + Result。
+- 执行：Service 类（status + echo），独立测试。
+- 验证：service_layer_test 通过。
