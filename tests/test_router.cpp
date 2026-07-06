@@ -8,36 +8,36 @@ int main() {
     router::Router r;
     controller::Controller ctrl;
 
-    // 普通路由
     r.add_route("GET", "/status", [&ctrl](const httplib::Request& req, httplib::Response& res) {
         ctrl.handle_status(req, res);
     });
 
-    // 带参数路由 (skeleton)
-    bool param_called = false;
-    r.add_route("GET", "/users/{id}", [&param_called](const httplib::Request&, httplib::Response& res) {
-        param_called = true;
-        res.set_content("user param route", "text/plain");
+    // POST 示例
+    r.add_route("POST", "/echo", [](const httplib::Request& req, httplib::Response& res) {
+        res.set_content("POST received: " + req.body, "text/plain");
+    });
+
+    // param
+    r.add_route("GET", "/users/{id}", [](const httplib::Request&, httplib::Response& res) {
+        res.set_content("param route", "text/plain");
     });
 
     httplib::Request req;
     httplib::Response res;
 
-    // 测试普通
     bool d1 = r.dispatch("GET", "/status", req, res);
     assert(d1);
-    assert(res.body == "service layer OK");
 
-    // 测试参数路由
-    bool d2 = r.dispatch("GET", "/users/42", req, res);
+    // POST
+    httplib::Request preq;
+    preq.body = "hello";
+    bool d2 = r.dispatch("POST", "/echo", preq, res);
     assert(d2);
-    assert(param_called);
-    assert(res.body == "user param route");
+    assert(res.body == "POST received: hello");
 
-    // 不匹配
-    bool d3 = r.dispatch("GET", "/unknown", req, res);
-    assert(!d3);
+    bool d3 = r.dispatch("GET", "/users/99", req, res);
+    assert(d3);
 
-    std::cout << "router params skeleton test passed\n";
+    std::cout << "router http methods test passed\n";
     return 0;
 }

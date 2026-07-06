@@ -386,3 +386,9 @@
 - 目标：router 支持 {param}。
 - 执行：matches() 简单实现；test 验证 /users/{id}。
 - 验证：router_layer_test 通过。
+
+## 2026-07-06 feat: router/server 支持 PUT/DELETE 等方法
+
+- 目标：扩展 router 支持更多 HTTP 方法。
+- 执行：apply_to 添加 PUT/DELETE；test 添加 POST 示例。
+- 验证：router_layer_test 通过。

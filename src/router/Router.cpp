@@ -48,8 +48,11 @@ void Router::apply_to(httplib::Server& svr) const {
             svr.Get(r.path, r.handler);
         } else if (r.method == "POST") {
             svr.Post(r.path, r.handler);
+        } else if (r.method == "PUT") {
+            svr.Put(r.path, r.handler);
+        } else if (r.method == "DELETE") {
+            svr.Delete(r.path, r.handler);
         }
-        // 未来可扩展 PUT DELETE 等
     }
 }
 

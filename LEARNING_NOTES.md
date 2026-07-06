@@ -718,3 +718,9 @@ router → controller → service → model
 
 ### 学习
 - 路由匹配是常见后端难题，skeleton 先演示思路，后续可升级为正则或 trie。
+
+## HTTP 方法扩展
+
+- Router apply_to 现在支持 GET/POST/PUT/DELETE。
+- dispatch 已按 method 匹配。
+- Server 通过 router 间接支持。
