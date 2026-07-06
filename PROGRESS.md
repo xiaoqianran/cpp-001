@@ -332,3 +332,9 @@
 - 目标：引入 model 层作为纯数据/DTO。
 - 执行：include/model/Status.hpp + tests/test_model.cpp。
 - 验证：model_layer_test 通过。
+
+## 2026-07-06 feat: service 层使用 model::Status（返回模型）
+
+- 目标：service 返回 model 层对象。
+- 执行：get_status 返回 Result<model::Status>；controller 和测试适配 .message。
+- 验证：test_service + test_controller 通过。

@@ -665,3 +665,13 @@ Status { message, healthy }
 ### 集成计划
 - service 返回 Status
 - controller 使用 Status 构造响应
+
+## 集成：service 返回 model
+
+### 变化
+- Service::get_status() 现在返回 model::Status 而非 raw string。
+- Controller 适配 result.value().message。
+- 保持 Result 包装用于错误处理。
+
+### 意义
+分层清晰：model (数据) ← service (逻辑) ← controller (HTTP 适配)
