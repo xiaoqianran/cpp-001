@@ -278,3 +278,9 @@
   - 更新 test_router 使用真实 Handler。
   - 调整 CMake 确保链接。
 - 验证：server_layer_test 和 router_layer_test 均通过。
+
+## 2026-07-06 feat: 集成 Router 到 Server 层（Server 持有 Router）
+
+- 目标：Server 持有 Router，实现分层集成。
+- 执行：Router 升级真实 Handler + apply_to；Server 委托路由；CMake 调整；测试通过。
+- 验证：两个层测试 100% 通过。
