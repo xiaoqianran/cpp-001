@@ -277,3 +277,12 @@ add_executable(test_service
 target_include_directories(test_service PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 add_test(NAME service_layer_test COMMAND test_service)
+
+# Model layer skeleton
+add_executable(test_model
+    tests/test_model.cpp
+)
+
+target_include_directories(test_model PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+add_test(NAME model_layer_test COMMAND test_model)

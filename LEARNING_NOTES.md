@@ -636,3 +636,17 @@ service 层不依赖 httplib 等上层框架。
 ### 改进方向
 - 使用依赖注入（构造函数传 Service&）。
 - Controller 不创建 Service 实例（更好解耦）。
+
+## 架构：Model 层
+
+### 职责
+- 领域模型 / DTO / 值对象。
+- 无业务逻辑（只有简单不变量验证）。
+- 可被 service、controller 使用。
+
+### 当前示例
+Status { message, healthy }
+
+### 未来
+- 可添加 from_json / to_json 等序列化。
+- 更多模型：User, Error 等。
