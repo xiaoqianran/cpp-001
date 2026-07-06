@@ -675,3 +675,13 @@ Status { message, healthy }
 
 ### 意义
 分层清晰：model (数据) ← service (逻辑) ← controller (HTTP 适配)
+
+## 集成：router + controller
+
+### 要点
+- Router 负责路径匹配和分发。
+- Controller 负责调用 service/model 构造响应。
+- 注册时使用 lambda 桥接（真实项目可用 std::bind 或成员函数包装）。
+
+### 架构进展
+router → controller → service → model

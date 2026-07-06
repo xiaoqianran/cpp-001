@@ -344,3 +344,9 @@
 - 目标：service 返回 model 层。
 - 执行：get_status 返回 Result<model::Status>；controller 适配。
 - 验证：test_service + test_controller 通过。
+
+## 2026-07-06 feat: 添加 router 注册 controller handler 示例
+
+- 目标：router 注册来自 controller 的 handler。
+- 执行：在 test 中注册 lambda 调用 ctrl.handle_status，验证 body/status。
+- 验证：router_layer_test 通过。
