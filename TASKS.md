@@ -5,6 +5,7 @@
 
 ## 当前任务
 
+- [x] feat: 更新 GOTCHAS.md 添加当前分层集成经验
 - [x] feat: 添加/更新 ARCHITECTURE.md 总结当前分层
 - [x] feat: router/server 支持 PUT/DELETE 等方法
 - [x] feat: router 添加简单路径参数支持 (skeleton)

@@ -20,3 +20,13 @@
 - 解决方案
 - 相关文件/提交
 - 防止再次发生的方法
+
+## 分层集成经验 (2026-07-06)
+
+- Server 持有 Router + apply_to：确保 listen 前 apply，否则路由不生效。
+- Handler 类型一致性：Server 和 Router 共享 using Handler，避免转换问题。
+- 测试链路：test_server 更新为使用 controller 后，必须确保 include 路径和编译目标包含所有 .cpp (router/server)。
+- 路径参数 skeleton：简单 string match 易出错，注意 prefix/suffix 检查边界 (空 suffix 等)。
+- worktree + 并行 build：有时 configure 超时，使用 --parallel 1 和不 rm build 可加速验证。
+- Result + model：service 返回 Result<model::Status> 后，调用方需 .value().message 而非直接 string。
+- httplib 注册：在 apply_to 中只注册已知方法，未来扩展需同步 dispatch。
