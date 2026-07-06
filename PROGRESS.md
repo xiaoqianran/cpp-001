@@ -368,3 +368,9 @@
 - 目标：server test 演示完整链路。
 - 执行：test_server 使用 Controller 注册 route，链路 server->router->controller->service->model。
 - 验证：server_layer_test 通过，返回 "service layer OK"。
+
+## 2026-07-06 feat: 更新 test_server 使用完整分层链路 (controller + service + model)
+
+- 目标：server test 演示完整集成链路。
+- 执行：注册 controller handler，链路覆盖 server/router/controller/service/model。
+- 验证：server_layer_test 通过。
