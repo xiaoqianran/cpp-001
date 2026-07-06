@@ -650,3 +650,18 @@ Status { message, healthy }
 ### 未来
 - 可添加 from_json / to_json 等序列化。
 - 更多模型：User, Error 等。
+
+## 架构：Model 层
+
+### 职责
+- 领域模型、DTO、值对象。
+- 纯数据 + 最小不变量检查。
+- 被 service、controller 使用（不包含业务逻辑）。
+
+### 当前实现
+- model::Status { message, healthy }
+- 简单构造 + is_healthy()
+
+### 集成计划
+- service 返回 Status
+- controller 使用 Status 构造响应

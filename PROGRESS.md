@@ -326,3 +326,9 @@
 - 目标：引入 model 层，纯数据结构。
 - 执行：model::Status 简单 DTO + 测试。
 - 验证：model_layer_test 通过。
+
+## 2026-07-06 feat: 添加简单 model 层骨架（数据传输对象）
+
+- 目标：引入 model 层作为纯数据/DTO。
+- 执行：include/model/Status.hpp + tests/test_model.cpp。
+- 验证：model_layer_test 通过。

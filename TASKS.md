@@ -5,6 +5,7 @@
 
 ## 当前任务
 
+- [x] feat: 添加简单 model 层骨架（数据传输对象）
 - [x] feat: 在 controller 中调用 service（简单集成）
 - [x] feat: 添加 service 层骨架（业务逻辑封装）
 
