@@ -68,6 +68,7 @@ add_executable(cpp-001
     src/main.cpp
     src/common/Logger.cpp
     src/common/Config.cpp
+    src/common/FilesystemUtils.cpp
     src/server/Server.cpp
     src/router/Router.cpp
 )
@@ -130,6 +131,7 @@ add_test(NAME filesystem_test COMMAND test_filesystem)
 add_executable(test_config
     tests/test_config.cpp
     src/common/Config.cpp
+    src/common/FilesystemUtils.cpp
 )
 
 target_include_directories(test_config PRIVATE

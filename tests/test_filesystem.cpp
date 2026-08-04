@@ -1,19 +1,31 @@
 #include "common/FilesystemUtils.hpp"
 
-#include <iostream>
 #include <cassert>
+#include <fstream>
+#include <iostream>
 #include <string>
-
-// 直接驱动真实 common::FilesystemUtils 实现。
 
 int main() {
     std::string cwd = common::current_working_directory();
-
     assert(!cwd.empty());
-    // 基本合理性检查：路径应包含分隔符或至少有长度
     assert(cwd.length() > 1);
 
-    std::cout << "test_filesystem: current_working_directory() = " << cwd << std::endl;
-    std::cout << "test_filesystem: all assertions passed (real std::filesystem impl exercised)." << std::endl;
+    const std::string tmp = "test_fs_tmp.txt";
+    {
+        std::ofstream out(tmp);
+        out << "hello-fs";
+    }
+    assert(common::file_exists(tmp));
+    auto content = common::read_text_file(tmp);
+    assert(content.is_ok());
+    assert(content.value() == "hello-fs");
+
+    auto missing = common::read_text_file("no_such_file_xyz.txt");
+    assert(missing.is_err());
+
+    std::remove(tmp.c_str());
+
+    std::cout << "test_filesystem: cwd=" << cwd << "\n";
+    std::cout << "test_filesystem: all assertions passed\n";
     return 0;
 }

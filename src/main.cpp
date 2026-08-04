@@ -1,5 +1,6 @@
 #include "common/Logger.hpp"
 #include "common/Config.hpp"
+#include "common/FilesystemUtils.hpp"
 #include "server/Server.hpp"
 #include "controller/Controller.hpp"
 
@@ -8,6 +9,7 @@
 #include <csignal>
 #include <string>
 #include <thread>
+#include <vector>
 
 // NOTE: main.cpp follows strict rule - ONLY startup, config assembly, logs, server lifecycle.
 // Wiring (composition root) is allowed; NO business logic.
@@ -18,20 +20,50 @@ std::atomic<bool> g_running{true};
 void on_signal(int) {
     g_running = false;
 }
+
+constexpr const char* kFallbackToml = R"(
+app_name = "cpp-001"
+host = "0.0.0.0"
+port = 18080
+)";
 } // namespace
 
 int main() {
     common::Logger logger;
 
     logger.log(common::LogLevel::Info, "cpp-001 C++ backend starting...");
+    logger.log(common::LogLevel::Info,
+               std::string("[fs] cwd = ") + common::current_working_directory());
 
-    // 薄集成：toml 演示配置（默认 18080，避免与常见 8080 冲突）
-    std::string demo_toml = R"(
-        app_name = "cpp-001"
-        host = "0.0.0.0"
-        port = 18080
-    )";
-    common::Config cfg(demo_toml);
+    // 从文件加载配置（候选路径覆盖从项目根 / build 目录启动）
+    const std::vector<std::string> config_candidates = {
+        "config/app.toml",
+        "../config/app.toml",
+        "../../config/app.toml",
+    };
+
+    std::string loaded_from = "(embedded fallback)";
+    common::Config cfg;
+    bool from_file = false;
+    for (const auto& path : config_candidates) {
+        auto res = common::Config::load_file(path);
+        if (res.is_ok()) {
+            cfg = res.value();
+            loaded_from = path;
+            from_file = true;
+            break;
+        }
+    }
+    if (!from_file) {
+        auto fb = common::Config::load_string(kFallbackToml);
+        if (fb.is_ok()) {
+            cfg = fb.value();
+        }
+        logger.log(common::LogLevel::Warn,
+                   "[config] file not found, using embedded defaults");
+    } else {
+        logger.log(common::LogLevel::Info, "[config] loaded from " + loaded_from);
+    }
 
     auto name_res = cfg.get_string("app_name");
     if (name_res.is_ok()) {

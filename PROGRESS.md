@@ -443,3 +443,10 @@
 - 执行：Controller::handle_status 序列化 model::Status；更新 test_controller / test_server；主程序链接 json。
 - 验证：ctest 18/18；curl /health → `{"healthy":true,"message":"service layer OK"}`
 - 学习要点：controller 只做 I/O 转换；Content-Type application/json；错误路径同样 JSON。
+
+
+## 2026-08-04 feat: 从配置文件加载 toml
+
+- 目标：Config 支持 filesystem 读文件；main 使用 config/app.toml。
+- 执行：load_file / load_string / load_with_fallback；FilesystemUtils::read_text_file / file_exists；config/app.toml；main 多候选路径。
+- 验证：ctest 18/18

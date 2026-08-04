@@ -5,6 +5,7 @@
 
 ## 当前任务
 
+- [x] feat: 从配置文件加载 toml（filesystem）
 - [x] feat: controller 返回 JSON（nlohmann/json）
 - [x] feat: repository 正式层 KvRepository + service 接入
 - [x] feat: main 启动真实 HTTP Server（薄集成 server+controller）
@@ -59,6 +60,8 @@
 
 ## 已完成
 
+- feat: 从配置文件加载 toml（filesystem） (2026-08-04): Config::load_file/load_string/load_with_fallback；config/app.toml；main 候选路径加载；ctest 18/18。
+
 - feat: controller 返回 JSON (2026-08-04): /health /status 返回 application/json；e2e 与 controller 测试更新；ctest 18/18。
 
 - feat: repository 正式层 KvRepository + service 接入 (2026-08-04): KvRepository get/set + Result；Service 默认内存 DB 种子 status_message；ctest 18/18。
@@ -87,12 +90,10 @@
 
 ## 待办队列（按推荐顺序，小步）
 
-1. `feat: 从配置文件加载 toml（filesystem）`
-2. `feat: 路径参数提取并绑定到 controller`
+1. `feat: 路径参数提取并绑定到 controller`
+2. `feat: KV REST API（GET/PUT/DELETE /kv/{key}）`
 3. `build: 接入 Catch2 或 doctest`
-4. `feat: 从配置文件加载 toml（filesystem）`
-5. `build: 接入 Catch2 或 doctest`（测试框架阶段）
-6. ... (后续从 LIBRARY_ROADMAP 按阶段拆分)
+4. ... (后续从 LIBRARY_ROADMAP 按阶段拆分)
 
 ## 规则
 
