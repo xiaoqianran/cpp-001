@@ -435,3 +435,11 @@
 - 验证：ctest 18/18
 - 学习要点：repository 无业务；service 组装 model；Database 不可拷贝 → unique_ptr + mutable
 - 下一步：controller JSON 响应
+
+
+## 2026-08-04 feat: controller 返回 JSON
+
+- 目标：HTTP 响应使用 nlohmann/json，符合 API 习惯。
+- 执行：Controller::handle_status 序列化 model::Status；更新 test_controller / test_server；主程序链接 json。
+- 验证：ctest 18/18；curl /health → `{"healthy":true,"message":"service layer OK"}`
+- 学习要点：controller 只做 I/O 转换；Content-Type application/json；错误路径同样 JSON。

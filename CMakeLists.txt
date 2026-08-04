@@ -80,6 +80,7 @@ target_link_libraries(cpp-001 PRIVATE spdlog::spdlog)
 target_link_libraries(cpp-001 PRIVATE tomlplusplus::tomlplusplus)
 target_link_libraries(cpp-001 PRIVATE httplib::httplib)
 target_link_libraries(cpp-001 PRIVATE SQLiteCpp sqlite3)
+target_link_libraries(cpp-001 PRIVATE nlohmann_json::nlohmann_json)
 
 # Enable testing with ctest (native, no external test framework for bootstrap)
 enable_testing()
@@ -250,7 +251,7 @@ target_include_directories(test_server PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-target_link_libraries(test_server PRIVATE httplib::httplib SQLiteCpp sqlite3)
+target_link_libraries(test_server PRIVATE httplib::httplib SQLiteCpp sqlite3 nlohmann_json::nlohmann_json)
 
 add_test(NAME server_layer_test COMMAND test_server)
 
@@ -262,7 +263,7 @@ add_executable(test_router
 
 target_include_directories(test_router PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-target_link_libraries(test_router PRIVATE httplib::httplib SQLiteCpp sqlite3)
+target_link_libraries(test_router PRIVATE httplib::httplib SQLiteCpp sqlite3 nlohmann_json::nlohmann_json)
 add_test(NAME router_layer_test COMMAND test_router)
 
 # Controller layer skeleton (minimal) — 依赖 service → repository
@@ -272,7 +273,7 @@ add_executable(test_controller
 
 target_include_directories(test_controller PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-target_link_libraries(test_controller PRIVATE httplib::httplib SQLiteCpp sqlite3)
+target_link_libraries(test_controller PRIVATE httplib::httplib SQLiteCpp sqlite3 nlohmann_json::nlohmann_json)
 add_test(NAME controller_layer_test COMMAND test_controller)
 
 # Service layer skeleton (minimal) — 依赖 repository/SQLiteCpp

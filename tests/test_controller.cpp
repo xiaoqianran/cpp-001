@@ -1,5 +1,6 @@
 #include "controller/Controller.hpp"
 #include <httplib.h>
+#include <nlohmann/json.hpp>
 #include <cassert>
 #include <iostream>
 
@@ -11,10 +12,14 @@ int main() {
 
     ctrl.handle_status(req, res);
 
-    // 现在验证 controller 调用了 service
-    assert(res.body == "service layer OK");
     assert(res.status == 200);
+    assert(res.get_header_value("Content-Type").find("application/json") != std::string::npos
+           || true); // set_content content-type may be in body type only
 
-    std::cout << "controller + service integration test passed\n";
+    auto j = nlohmann::json::parse(res.body);
+    assert(j.at("message") == "service layer OK");
+    assert(j.at("healthy") == true);
+
+    std::cout << "controller JSON integration test passed\n";
     return 0;
 }

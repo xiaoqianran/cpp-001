@@ -1,6 +1,7 @@
 #include "server/Server.hpp"
 #include "controller/Controller.hpp"
 #include <httplib.h>
+#include <nlohmann/json.hpp>
 #include <cassert>
 #include <iostream>
 #include <thread>
@@ -25,8 +26,10 @@ int main() {
     app.stop();
 
     assert(res && res->status == 200);
-    assert(res->body == "service layer OK");
+    auto j = nlohmann::json::parse(res->body);
+    assert(j.at("message") == "service layer OK");
+    assert(j.at("healthy") == true);
 
-    std::cout << "server e2e full chain test passed\n";
+    std::cout << "server e2e full chain JSON test passed\n";
     return 0;
 }
