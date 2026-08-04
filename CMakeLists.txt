@@ -79,6 +79,7 @@ target_link_libraries(cpp-001 PRIVATE fmt::fmt)
 target_link_libraries(cpp-001 PRIVATE spdlog::spdlog)
 target_link_libraries(cpp-001 PRIVATE tomlplusplus::tomlplusplus)
 target_link_libraries(cpp-001 PRIVATE httplib::httplib)
+target_link_libraries(cpp-001 PRIVATE SQLiteCpp sqlite3)
 
 # Enable testing with ctest (native, no external test framework for bootstrap)
 enable_testing()
@@ -238,7 +239,7 @@ target_link_libraries(test_httpserver PRIVATE httplib::httplib)
 
 add_test(NAME httpserver_test COMMAND test_httpserver)
 
-# Server layer skeleton
+# Server layer skeleton — 完整链路含 service/repository
 add_executable(test_server
     src/server/Server.cpp
     src/router/Router.cpp
@@ -249,11 +250,11 @@ target_include_directories(test_server PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-target_link_libraries(test_server PRIVATE httplib::httplib)
+target_link_libraries(test_server PRIVATE httplib::httplib SQLiteCpp sqlite3)
 
 add_test(NAME server_layer_test COMMAND test_server)
 
-# Router layer skeleton
+# Router layer skeleton — 含 controller/service/repository
 add_executable(test_router
     src/router/Router.cpp
     tests/test_router.cpp
@@ -261,25 +262,26 @@ add_executable(test_router
 
 target_include_directories(test_router PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-target_link_libraries(test_router PRIVATE httplib::httplib)
+target_link_libraries(test_router PRIVATE httplib::httplib SQLiteCpp sqlite3)
 add_test(NAME router_layer_test COMMAND test_router)
 
-# Controller layer skeleton (minimal)
+# Controller layer skeleton (minimal) — 依赖 service → repository
 add_executable(test_controller
     tests/test_controller.cpp
 )
 
 target_include_directories(test_controller PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-target_link_libraries(test_controller PRIVATE httplib::httplib)
+target_link_libraries(test_controller PRIVATE httplib::httplib SQLiteCpp sqlite3)
 add_test(NAME controller_layer_test COMMAND test_controller)
 
-# Service layer skeleton (minimal)
+# Service layer skeleton (minimal) — 依赖 repository/SQLiteCpp
 add_executable(test_service
     tests/test_service.cpp
 )
 
 target_include_directories(test_service PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_link_libraries(test_service PRIVATE SQLiteCpp sqlite3)
 
 add_test(NAME service_layer_test COMMAND test_service)
 

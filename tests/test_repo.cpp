@@ -1,29 +1,27 @@
-#include <SQLiteCpp/SQLiteCpp.h>
-#include "common/Result.hpp"
+#include "repository/KvRepository.hpp"
 
 #include <cassert>
 #include <iostream>
 #include <string>
 
 int main() {
-    try {
-        SQLite::Database db(":memory:", SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
+    repository::KvRepository repo(":memory:");
 
-        db.exec("CREATE TABLE IF NOT EXISTS kv (key TEXT PRIMARY KEY, value TEXT);");
-        db.exec("INSERT OR REPLACE INTO kv (key, value) VALUES ('app', 'cpp-001');");
+    auto set_res = repo.set("app", "cpp-001");
+    assert(set_res.is_ok());
+    assert(set_res.value() == true);
 
-        SQLite::Statement query(db, "SELECT value FROM kv WHERE key = ?");
-        query.bind(1, "app");
+    auto get_res = repo.get("app");
+    assert(get_res.is_ok());
+    assert(get_res.value() == "cpp-001");
 
-        if (query.executeStep()) {
-            std::string val = query.getColumn(0);
-            assert(val == "cpp-001");
-            std::cout << "repo example passed (value=" << val << ")\n";
-            return 0;
-        }
-    } catch (const std::exception& e) {
-        std::cerr << "SQLite error: " << e.what() << std::endl;
-    }
-    assert(false && "repo test failed");
-    return 1;
+    auto missing = repo.get("nope");
+    assert(missing.is_err());
+
+    // 覆盖写
+    assert(repo.set("app", "updated").is_ok());
+    assert(repo.get("app").value() == "updated");
+
+    std::cout << "repo KvRepository test passed (value=" << get_res.value() << ")\n";
+    return 0;
 }

@@ -423,3 +423,15 @@
 - 验证：ctest 18/18；curl /health /status 返回 200 + "service layer OK"
 - 学习要点：composition root 可在 main 做组装；业务仍在 service；后台 listen + 信号退出是最小生命周期。
 - 下一步：repository 正式层 → service 接入 → JSON 响应
+
+
+## 2026-08-04 feat: repository 正式层 + service 接入
+
+- 目标：把 SQLite 练习提升为正式 repository，并让 service 真正读库。
+- 执行：
+  - `include/repository/KvRepository.hpp`：get/set + Result，内存/文件路径均可
+  - Service 默认持有 shared_ptr<KvRepository>，种子 key `status_message`
+  - test_repo 改为驱动真实 KvRepository；相关 target 链接 SQLiteCpp
+- 验证：ctest 18/18
+- 学习要点：repository 无业务；service 组装 model；Database 不可拷贝 → unique_ptr + mutable
+- 下一步：controller JSON 响应

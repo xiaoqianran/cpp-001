@@ -79,3 +79,10 @@ model/      -> 实体、DTO、值对象
 - main 作为 composition root：Config + Logger + Server + Controller 路由注册。
 - 默认监听 `0.0.0.0:18080`，路由：`GET /health`、`GET /status` → controller → service → model。
 - Server::listen 后台线程；`is_running()` 供 main 生命周期循环；SIGINT/SIGTERM 触发 stop。
+
+
+## 2026-08-04 repository 正式层
+
+- `repository::KvRepository`：SQLiteCpp KV 表，get/set 返回 `Result`
+- `service::Service` 依赖 repository（可注入 shared_ptr），默认 `:memory:` 并种子 `status_message`
+- 链路：server → router → controller → service → repository → model

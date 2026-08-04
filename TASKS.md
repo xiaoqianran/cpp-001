@@ -5,6 +5,7 @@
 
 ## 当前任务
 
+- [x] feat: repository 正式层 KvRepository + service 接入
 - [x] feat: main 启动真实 HTTP Server（薄集成 server+controller）
 - [x] feat: 更新 GOTCHAS.md 添加当前分层集成经验
 - [x] feat: 添加/更新 ARCHITECTURE.md 总结当前分层
@@ -57,6 +58,8 @@
 
 ## 已完成
 
+- feat: repository 正式层 KvRepository + service 接入 (2026-08-04): KvRepository get/set + Result；Service 默认内存 DB 种子 status_message；ctest 18/18。
+
 - feat: main 启动真实 HTTP Server（薄集成） (2026-08-04): main 组装 Server+Controller，监听 /health /status，SIGINT 优雅退出；ctest 18/18 + curl 冒烟通过。
 
 - feat: 为 Result 添加简单链式操作 (value_or / map) (2026-07-06): 增加 value_or 和 map 模板方法，提升 Result 易用性。
@@ -81,9 +84,9 @@
 
 ## 待办队列（按推荐顺序，小步）
 
-1. `feat: repository 正式层 KvRepository（SQLiteCpp + Result）`
-2. `feat: service 通过 repository 读取状态`
-3. `feat: controller 返回 JSON（nlohmann/json）`
+1. `feat: controller 返回 JSON（nlohmann/json）`
+2. `feat: 从配置文件加载 toml（filesystem）`
+3. `build: 接入 Catch2 或 doctest`
 4. `feat: 从配置文件加载 toml（filesystem）`
 5. `build: 接入 Catch2 或 doctest`（测试框架阶段）
 6. ... (后续从 LIBRARY_ROADMAP 按阶段拆分)
