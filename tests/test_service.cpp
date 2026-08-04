@@ -10,12 +10,19 @@ int main() {
     assert(res.value().message == "service layer OK");
     assert(res.value().is_healthy());
 
-    std::string echoed = svc.echo("hello");
-    assert(echoed == "echo: hello");
+    assert(svc.echo("hello") == "echo: hello");
+    assert(svc.echo("") == "echo: (empty)");
 
-    std::string empty_echo = svc.echo("");
-    assert(empty_echo == "echo: (empty)");
+    assert(svc.put_kv("k1", "v1").is_ok());
+    assert(svc.get_kv("k1").value() == "v1");
+    assert(svc.get_kv("missing").is_err());
+    assert(svc.delete_kv("k1").value() == true);
+    assert(svc.get_kv("k1").is_err());
 
-    std::cout << "service + model test passed\n";
+    assert(svc.put_kv("x", "1").is_ok());
+    assert(svc.put_kv("y", "2").is_ok());
+    assert(svc.list_keys().value().size() == 3); // status_message + x + y
+
+    std::cout << "service + kv test passed\n";
     return 0;
 }

@@ -450,3 +450,15 @@
 - 目标：Config 支持 filesystem 读文件；main 使用 config/app.toml。
 - 执行：load_file / load_string / load_with_fallback；FilesystemUtils::read_text_file / file_exists；config/app.toml；main 多候选路径。
 - 验证：ctest 18/18
+
+
+## 2026-08-04 feat: 路径参数 + KV REST API
+
+- 目标：路径参数真正可用；提供可演示的 KV CRUD HTTP 接口。
+- 执行：
+  - router::match_and_extract / to_httplib_pattern；dispatch 写入 path_params
+  - repository del + keys；service get/put/delete/list
+  - controller 注入共享 Service；JSON 错误体
+  - 路由：GET /kv、GET|PUT|DELETE /kv/{key}、POST /echo
+- 验证：ctest 18/18；curl 冒烟全链路通过；config/app.toml 成功加载
+- 学习要点：httplib 使用 :param；{param} 需转换；共享 Service 才能跨请求保持 KV 状态

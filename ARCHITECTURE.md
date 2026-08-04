@@ -86,3 +86,14 @@ model/      -> 实体、DTO、值对象
 - `repository::KvRepository`：SQLiteCpp KV 表，get/set 返回 `Result`
 - `service::Service` 依赖 repository（可注入 shared_ptr），默认 `:memory:` 并种子 `status_message`
 - 链路：server → router → controller → service → repository → model
+
+
+## 2026-08-04 路径参数与 KV API
+
+- Router 段级匹配，`{name}` 提取到 `req.path_params`；`apply_to` 转为 httplib `:name`
+- Controller 持有 `shared_ptr<Service>`，保证 KV 跨请求一致
+- 对外 API：
+  - `GET /health` / `GET /status`
+  - `GET /kv` 列出 keys
+  - `GET|PUT|DELETE /kv/{key}`
+  - `POST /echo`

@@ -7,21 +7,25 @@
 int main() {
     repository::KvRepository repo(":memory:");
 
-    auto set_res = repo.set("app", "cpp-001");
-    assert(set_res.is_ok());
-    assert(set_res.value() == true);
+    assert(repo.set("app", "cpp-001").is_ok());
+    assert(repo.get("app").value() == "cpp-001");
+    assert(repo.get("nope").is_err());
 
-    auto get_res = repo.get("app");
-    assert(get_res.is_ok());
-    assert(get_res.value() == "cpp-001");
-
-    auto missing = repo.get("nope");
-    assert(missing.is_err());
-
-    // 覆盖写
     assert(repo.set("app", "updated").is_ok());
     assert(repo.get("app").value() == "updated");
 
-    std::cout << "repo KvRepository test passed (value=" << get_res.value() << ")\n";
+    auto del = repo.del("app");
+    assert(del.is_ok() && del.value() == true);
+    assert(repo.get("app").is_err());
+    auto del2 = repo.del("app");
+    assert(del2.is_ok() && del2.value() == false);
+
+    assert(repo.set("a", "1").is_ok());
+    assert(repo.set("b", "2").is_ok());
+    auto keys = repo.keys();
+    assert(keys.is_ok());
+    assert(keys.value().size() == 2);
+
+    std::cout << "repo KvRepository CRUD test passed\n";
     return 0;
 }

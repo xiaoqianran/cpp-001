@@ -5,6 +5,8 @@
 
 ## 当前任务
 
+- [x] feat: KV REST API（GET/PUT/DELETE /kv/{key}）
+- [x] feat: 路径参数提取并绑定到 controller
 - [x] feat: 从配置文件加载 toml（filesystem）
 - [x] feat: controller 返回 JSON（nlohmann/json）
 - [x] feat: repository 正式层 KvRepository + service 接入
@@ -60,6 +62,8 @@
 
 ## 已完成
 
+- feat: 路径参数提取 + KV REST API (2026-08-04): router 段匹配写入 path_params；{param}→:param；KvRepository del/keys；GET/PUT/DELETE /kv/{key}、GET /kv、POST /echo；共享 Service；ctest 18/18。
+
 - feat: 从配置文件加载 toml（filesystem） (2026-08-04): Config::load_file/load_string/load_with_fallback；config/app.toml；main 候选路径加载；ctest 18/18。
 
 - feat: controller 返回 JSON (2026-08-04): /health /status 返回 application/json；e2e 与 controller 测试更新；ctest 18/18。
@@ -90,10 +94,11 @@
 
 ## 待办队列（按推荐顺序，小步）
 
-1. `feat: 路径参数提取并绑定到 controller`
-2. `feat: KV REST API（GET/PUT/DELETE /kv/{key}）`
+1. `feat: 持久化 SQLite 文件路径可配置`
+2. `feat: POST /echo 请求限流或简单中间件骨架`
 3. `build: 接入 Catch2 或 doctest`
-4. ... (后续从 LIBRARY_ROADMAP 按阶段拆分)
+4. `build: 接入 Boost.Asio 异步入门（了解）`
+5. ... (后续从 LIBRARY_ROADMAP 按阶段拆分)
 
 ## 规则
 

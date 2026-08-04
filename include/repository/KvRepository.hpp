@@ -6,14 +6,12 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 
 namespace repository {
 
 /**
  * 最小 repository 层：基于 SQLiteCpp 的 KV 存储。
- * - 值语义友好（通过 shared_ptr / 移动持有 Database）
- * - 返回 Result 做显式错误处理
- * - 无业务逻辑
  */
 class KvRepository {
 public:
@@ -27,7 +25,6 @@ public:
             ");");
     }
 
-    // Database 不可拷贝
     KvRepository(const KvRepository&) = delete;
     KvRepository& operator=(const KvRepository&) = delete;
     KvRepository(KvRepository&&) noexcept = default;
@@ -59,8 +56,32 @@ public:
         }
     }
 
+    /** 删除 key；不存在时 ok=true 且 value=false */
+    common::Result<bool, std::string> del(const std::string& key) {
+        try {
+            SQLite::Statement stmt(*db_, "DELETE FROM kv WHERE key = ?");
+            stmt.bind(1, key);
+            stmt.exec();
+            return db_->getChanges() > 0;
+        } catch (const std::exception& e) {
+            return {false, std::string(e.what())};
+        }
+    }
+
+    common::Result<std::vector<std::string>, std::string> keys() const {
+        try {
+            std::vector<std::string> out;
+            SQLite::Statement query(*db_, "SELECT key FROM kv ORDER BY key");
+            while (query.executeStep()) {
+                out.emplace_back(query.getColumn(0).getText());
+            }
+            return out;
+        } catch (const std::exception& e) {
+            return {false, std::string(e.what())};
+        }
+    }
+
 private:
-    // get() 为 const，但 SQLite Statement 需要非 const Database 引用
     mutable std::unique_ptr<SQLite::Database> db_;
 };
 

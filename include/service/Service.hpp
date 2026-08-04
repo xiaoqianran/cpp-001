@@ -6,6 +6,7 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 
 namespace service {
 
@@ -16,7 +17,6 @@ namespace service {
 class Service {
 public:
     Service() : repo_(std::make_shared<repository::KvRepository>(":memory:")) {
-        // 种子数据，保证 /health 链路可演示
         (void)repo_->set("status_message", "service layer OK");
     }
 
@@ -25,14 +25,37 @@ public:
 
     virtual ~Service() = default;
 
-    // 从 repository 读取状态消息，封装为 model::Status
     common::Result<model::Status, std::string> get_status() const {
         auto r = repo_->get("status_message");
         if (r.is_ok()) {
             return model::Status(r.value());
         }
-        // 缺 key 时给出明确错误，仍保持 Result 语义
         return {false, r.error()};
+    }
+
+    common::Result<std::string, std::string> get_kv(const std::string& key) const {
+        if (key.empty()) {
+            return {false, "empty key"};
+        }
+        return repo_->get(key);
+    }
+
+    common::Result<bool, std::string> put_kv(const std::string& key, const std::string& value) {
+        if (key.empty()) {
+            return {false, "empty key"};
+        }
+        return repo_->set(key, value);
+    }
+
+    common::Result<bool, std::string> delete_kv(const std::string& key) {
+        if (key.empty()) {
+            return {false, "empty key"};
+        }
+        return repo_->del(key);
+    }
+
+    common::Result<std::vector<std::string>, std::string> list_keys() const {
+        return repo_->keys();
     }
 
     std::string echo(const std::string& input) const {

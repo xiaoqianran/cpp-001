@@ -3,16 +3,17 @@
 #include "common/FilesystemUtils.hpp"
 #include "server/Server.hpp"
 #include "controller/Controller.hpp"
+#include "service/Service.hpp"
 
 #include <atomic>
 #include <chrono>
 #include <csignal>
+#include <memory>
 #include <string>
 #include <thread>
 #include <vector>
 
-// NOTE: main.cpp follows strict rule - ONLY startup, config assembly, logs, server lifecycle.
-// Wiring (composition root) is allowed; NO business logic.
+// NOTE: main.cpp — only startup, config assembly, logs, server lifecycle + wiring.
 
 namespace {
 std::atomic<bool> g_running{true};
@@ -35,7 +36,6 @@ int main() {
     logger.log(common::LogLevel::Info,
                std::string("[fs] cwd = ") + common::current_working_directory());
 
-    // 从文件加载配置（候选路径覆盖从项目根 / build 目录启动）
     const std::vector<std::string> config_candidates = {
         "config/app.toml",
         "../config/app.toml",
@@ -84,15 +84,31 @@ int main() {
     logger.log(common::LogLevel::Info,
                "[config] listen = " + host + ":" + std::to_string(port));
 
-    // 组装：server + controller（controller 内部再调 service/model）
+    // 共享 service：跨请求共用同一 repository
+    auto svc = std::make_shared<service::Service>();
+    controller::Controller ctrl(svc);
     server::Server app;
-    controller::Controller ctrl;
 
     app.route("GET", "/health", [&ctrl](const httplib::Request& req, httplib::Response& res) {
         ctrl.handle_status(req, res);
     });
     app.route("GET", "/status", [&ctrl](const httplib::Request& req, httplib::Response& res) {
         ctrl.handle_status(req, res);
+    });
+    app.route("GET", "/kv", [&ctrl](const httplib::Request& req, httplib::Response& res) {
+        ctrl.handle_list_kv(req, res);
+    });
+    app.route("GET", "/kv/{key}", [&ctrl](const httplib::Request& req, httplib::Response& res) {
+        ctrl.handle_get_kv(req, res);
+    });
+    app.route("PUT", "/kv/{key}", [&ctrl](const httplib::Request& req, httplib::Response& res) {
+        ctrl.handle_put_kv(req, res);
+    });
+    app.route("DELETE", "/kv/{key}", [&ctrl](const httplib::Request& req, httplib::Response& res) {
+        ctrl.handle_delete_kv(req, res);
+    });
+    app.route("POST", "/echo", [&ctrl](const httplib::Request& req, httplib::Response& res) {
+        ctrl.handle_echo(req, res);
     });
 
     std::signal(SIGINT, on_signal);
@@ -106,7 +122,9 @@ int main() {
         return 1;
     }
 
-    logger.log(common::LogLevel::Info, "[server] listening (GET /health, GET /status)");
+    logger.log(common::LogLevel::Info,
+               "[server] routes: GET /health /status /kv /kv/{key} | "
+               "PUT/DELETE /kv/{key} | POST /echo");
     logger.log(common::LogLevel::Info, "cpp-001 ready. Ctrl+C to stop.");
 
     while (g_running && app.is_running()) {

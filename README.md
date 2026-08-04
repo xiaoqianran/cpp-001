@@ -149,8 +149,26 @@ ctest --test-dir build --output-on-failure
 |------|------|------|
 | GET | `/health` | 健康状态 JSON |
 | GET | `/status` | 同上（别名） |
+| GET | `/kv` | 列出全部 key |
+| GET | `/kv/{key}` | 读取 value |
+| PUT | `/kv/{key}` | 写入（body 为纯文本或 `{"value":"..."}`） |
+| DELETE | `/kv/{key}` | 删除 |
+| POST | `/echo` | 回显 body |
 
-链路：`Server → Router → Controller → Service → KvRepository → model::Status`。
+示例：
+
+```bash
+curl -X PUT http://127.0.0.1:18080/kv/hello \
+  -H 'Content-Type: application/json' \
+  -d '{"value":"world"}'
+
+curl http://127.0.0.1:18080/kv/hello
+# {"key":"hello","value":"world"}
+```
+
+链路：`Server → Router → Controller → Service → KvRepository → model`。
+
+配置文件：`config/app.toml`（支持从项目根或 `build/` 上一级候选路径加载）。
 
 ---
 
