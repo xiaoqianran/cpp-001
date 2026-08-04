@@ -19,17 +19,22 @@ void Server::listen(const std::string& host, int port) {
     running_ = true;
     server_thread_ = std::thread([this, host, port]() {
         svr_.listen(host, port);
+        running_ = false;
     });
 }
 
 void Server::stop() {
-    if (running_) {
+    if (running_ || server_thread_.joinable()) {
         svr_.stop();
         if (server_thread_.joinable()) {
             server_thread_.join();
         }
         running_ = false;
     }
+}
+
+bool Server::is_running() const {
+    return running_;
 }
 
 } // namespace server

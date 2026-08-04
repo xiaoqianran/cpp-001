@@ -60,13 +60,16 @@ FetchContent_Declare(
   GIT_REPOSITORY https://github.com/SRombauts/SQLiteCpp.git
   GIT_TAG        3.3.1
 )
+set(SQLITECPP_INTERNAL_SQLITE ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(SQLiteCpp)
 
-# Main executable - thin startup only (per rules)
+# Main executable - thin startup / composition root only (per rules)
 add_executable(cpp-001
     src/main.cpp
     src/common/Logger.cpp
     src/common/Config.cpp
+    src/server/Server.cpp
+    src/router/Router.cpp
 )
 
 target_include_directories(cpp-001 PRIVATE
@@ -75,6 +78,7 @@ target_include_directories(cpp-001 PRIVATE
 target_link_libraries(cpp-001 PRIVATE fmt::fmt)
 target_link_libraries(cpp-001 PRIVATE spdlog::spdlog)
 target_link_libraries(cpp-001 PRIVATE tomlplusplus::tomlplusplus)
+target_link_libraries(cpp-001 PRIVATE httplib::httplib)
 
 # Enable testing with ctest (native, no external test framework for bootstrap)
 enable_testing()
@@ -146,6 +150,7 @@ target_include_directories(test_json PRIVATE
 target_link_libraries(test_json PRIVATE nlohmann_json::nlohmann_json)
 
 add_test(NAME json_test COMMAND test_json)
+
 
 # HTTP test (cpp-httplib)
 add_executable(test_httplib

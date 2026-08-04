@@ -72,3 +72,10 @@ model/      -> 实体、DTO、值对象
 - test_router: controller + param + 多方法
 
 原则遵守: 薄 main, 分层单向, 值语义, 小步验证。
+
+
+## 2026-08-04 main 真实 HTTP
+
+- main 作为 composition root：Config + Logger + Server + Controller 路由注册。
+- 默认监听 `0.0.0.0:18080`，路由：`GET /health`、`GET /status` → controller → service → model。
+- Server::listen 后台线程；`is_running()` 供 main 生命周期循环；SIGINT/SIGTERM 触发 stop。

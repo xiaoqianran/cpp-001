@@ -12,7 +12,7 @@ namespace server {
 
 /**
  * 最小 server 层封装（基于 cpp-httplib）。
- * 现在持有 Router 层进行路由管理。
+ * 持有 Router 层进行路由管理；listen 在后台线程启动。
  */
 class Server {
 public:
@@ -24,6 +24,7 @@ public:
     void route(const std::string& method, const std::string& pattern, Handler handler);
     void listen(const std::string& host, int port);
     void stop();
+    bool is_running() const;
 
 private:
     httplib::Server svr_;

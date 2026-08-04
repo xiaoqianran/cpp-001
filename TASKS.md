@@ -5,6 +5,7 @@
 
 ## 当前任务
 
+- [x] feat: main 启动真实 HTTP Server（薄集成 server+controller）
 - [x] feat: 更新 GOTCHAS.md 添加当前分层集成经验
 - [x] feat: 添加/更新 ARCHITECTURE.md 总结当前分层
 - [x] feat: router/server 支持 PUT/DELETE 等方法
@@ -56,6 +57,8 @@
 
 ## 已完成
 
+- feat: main 启动真实 HTTP Server（薄集成） (2026-08-04): main 组装 Server+Controller，监听 /health /status，SIGINT 优雅退出；ctest 18/18 + curl 冒烟通过。
+
 - feat: 为 Result 添加简单链式操作 (value_or / map) (2026-07-06): 增加 value_or 和 map 模板方法，提升 Result 易用性。
 
 - feat: 添加 Result<T,E> 错误处理封装（common） (2026-07-06): 基于 std::variant 的最小 Result，实现 is_ok/value/error，带测试。
@@ -78,11 +81,12 @@
 
 ## 待办队列（按推荐顺序，小步）
 
-1. `feat: 基础日志封装` （引入或封装简单日志，后续接入 spdlog）
-2. `docs: 完善 ARCHITECTURE.md 各层详细职责`
-3. 标准库专项小功能（e.g. filesystem 练习）
-4. 接入 fmt 做格式化（build: 接入 fmt）
-5. ... (后续从 LIBRARY_ROADMAP 按阶段拆分)
+1. `feat: repository 正式层 KvRepository（SQLiteCpp + Result）`
+2. `feat: service 通过 repository 读取状态`
+3. `feat: controller 返回 JSON（nlohmann/json）`
+4. `feat: 从配置文件加载 toml（filesystem）`
+5. `build: 接入 Catch2 或 doctest`（测试框架阶段）
+6. ... (后续从 LIBRARY_ROADMAP 按阶段拆分)
 
 ## 规则
 

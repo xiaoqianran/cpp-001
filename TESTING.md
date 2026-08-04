@@ -20,7 +20,14 @@ ctest --test-dir build
 ./build/cpp-001
 ```
 
-应看到启动存根输出，无崩溃。
+应看到启动日志，并在配置端口（默认 18080）监听 HTTP。
+
+```bash
+curl http://127.0.0.1:18080/health
+# 期望: service layer OK
+```
+
+Ctrl+C 优雅退出。
 
 ## 添加新测试
 

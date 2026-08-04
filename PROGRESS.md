@@ -410,3 +410,16 @@
 - 目标：记录集成踩坑。
 - 执行：追加 server-router, param, chain, build 注意。
 - 验证：文件更新。
+
+## 2026-08-04 feat: main 启动真实 HTTP Server
+
+- 目标：main 不再是 stub，真正组装 server + controller 并 listen。
+- 执行：
+  - worktree: cpp-001-task-main-http (branch task/main-http)
+  - Server 增加 is_running()；stop 更稳健
+  - main 读取 host/port 配置，注册 GET /health /status，SIGINT/SIGTERM 优雅退出
+  - CMake 主目标链接 Server/Router/httplib
+  - 默认端口 18080（避免与常见 8080 冲突）
+- 验证：ctest 18/18；curl /health /status 返回 200 + "service layer OK"
+- 学习要点：composition root 可在 main 做组装；业务仍在 service；后台 listen + 信号退出是最小生命周期。
+- 下一步：repository 正式层 → service 接入 → JSON 响应
